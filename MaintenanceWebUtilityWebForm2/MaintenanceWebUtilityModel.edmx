@@ -1,0 +1,876 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MaintenanceWebUtilityDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChangeLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="FacilityId" Type="int" Nullable="false" />
+          <Property Name="ChangeDateCreated" Type="datetime" />
+          <Property Name="ChangePerformed" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeTypeId" Type="int" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordTxt" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="DateCreated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EmployeeType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EmployeeTypeName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EmployeeTypeFacilityAccessibles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EmployeeTypeId" Type="int" Nullable="false" />
+          <Property Name="FacilityId" Type="int" Nullable="false" />
+          <Property Name="IsAccessible" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Facility">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FacilityName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FacilityPeriod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FacilityId" Type="int" Nullable="false" />
+          <Property Name="PeriodId" Type="int" Nullable="false" />
+          <Property Name="EncodingStartDate" Type="datetime" />
+          <Property Name="EncodingEndDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SchoolPeriod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="SchoolYear" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SHSTerm" Type="int" Nullable="false" />
+          <Property Name="SHSTermStartingDate" Type="datetime" />
+          <Property Name="SHSTermEndingDate" Type="datetime" />
+          <Property Name="IsPeriodActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SHS_School_Period">
+          <Key>
+            <PropertyRef Name="Period_ID" />
+          </Key>
+          <Property Name="Period_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SHS_Term_Code" Type="int" Nullable="false" />
+          <Property Name="Period_Number" Type="tinyint" Nullable="false" />
+          <Property Name="Period_Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="School_Days" Type="float" Nullable="false" />
+          <Property Name="Is_Active" Type="bit" Nullable="false" />
+          <Property Name="Encoding_Start" Type="datetime" Nullable="false" />
+          <Property Name="Encoding_End" Type="datetime" Nullable="false" />
+          <Property Name="Updated_Date" Type="datetime" Nullable="false" />
+          <Property Name="Updated_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Updated_Host" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Updated_App" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SHS_School_Term">
+          <Key>
+            <PropertyRef Name="SHS_Term_Code" />
+          </Key>
+          <Property Name="SHS_Term_Code" Type="int" Nullable="false" />
+          <Property Name="School_Year" Type="smallint" Nullable="false" />
+          <Property Name="School_Term_Number" Type="tinyint" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Date_Start" Type="date" Nullable="false" />
+          <Property Name="Date_End" Type="date" Nullable="false" />
+          <Property Name="Is_Active" Type="bit" Nullable="false" />
+          <Property Name="Graduation_Date" Type="date" />
+          <Property Name="Enrollment_Date_Start" Type="date" />
+          <Property Name="Enrollment_Date_End" Type="date" />
+          <Property Name="College_Term_Code" Type="int" Nullable="false" />
+          <Property Name="Updated_Date" Type="datetime" Nullable="false" />
+          <Property Name="Updated_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Updated_Host" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Updated_App" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_ChangeLog_Employee_Id">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="ChangeLog" Type="Self.ChangeLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChangeLog">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChangeLog_Facility_Id">
+          <End Role="Facility" Type="Self.Facility" Multiplicity="1" />
+          <End Role="ChangeLog" Type="Self.ChangeLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facility">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChangeLog">
+              <PropertyRef Name="FacilityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_EmployeeType_Id">
+          <End Role="EmployeeType" Type="Self.EmployeeType" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeTypeFacilityAccessibles_EmployeeType_Id">
+          <End Role="EmployeeType" Type="Self.EmployeeType" Multiplicity="1" />
+          <End Role="EmployeeTypeFacilityAccessibles" Type="Self.EmployeeTypeFacilityAccessibles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeTypeFacilityAccessibles">
+              <PropertyRef Name="EmployeeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeTypeFacilityAccessibles_Facility_Id">
+          <End Role="Facility" Type="Self.Facility" Multiplicity="1" />
+          <End Role="EmployeeTypeFacilityAccessibles" Type="Self.EmployeeTypeFacilityAccessibles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facility">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeTypeFacilityAccessibles">
+              <PropertyRef Name="FacilityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacilityPeriod_Facility_Id">
+          <End Role="Facility" Type="Self.Facility" Multiplicity="1" />
+          <End Role="FacilityPeriod" Type="Self.FacilityPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facility">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacilityPeriod">
+              <PropertyRef Name="FacilityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacilityPeriod_Period_Id">
+          <End Role="SchoolPeriod" Type="Self.SchoolPeriod" Multiplicity="1" />
+          <End Role="FacilityPeriod" Type="Self.FacilityPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolPeriod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacilityPeriod">
+              <PropertyRef Name="PeriodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SHS_School_Period_SHS_School_Term">
+          <End Role="SHS_School_Term" Type="Self.SHS_School_Term" Multiplicity="1" />
+          <End Role="SHS_School_Period" Type="Self.SHS_School_Period" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SHS_School_Term">
+              <PropertyRef Name="SHS_Term_Code" />
+            </Principal>
+            <Dependent Role="SHS_School_Period">
+              <PropertyRef Name="SHS_Term_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspEditFacilityPeriod" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="EncodingStartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EncodingEndDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="uspGetActiveFacilityPeriod" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspGetEmpAccessibles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspInsertChangeLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="FacilityId" Type="int" Mode="In" />
+          <Parameter Name="ChangePerformed" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="uspValidateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="MaintenanceWebUtilityDbModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChangeLog" EntityType="Self.ChangeLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeType" EntityType="Self.EmployeeType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeTypeFacilityAccessibles" EntityType="Self.EmployeeTypeFacilityAccessibles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facility" EntityType="Self.Facility" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacilityPeriod" EntityType="Self.FacilityPeriod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SchoolPeriod" EntityType="Self.SchoolPeriod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SHS_School_Period" EntityType="Self.SHS_School_Period" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SHS_School_Term" EntityType="Self.SHS_School_Term" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ChangeLog_Employee_Id" Association="Self.FK_ChangeLog_Employee_Id">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="ChangeLog" EntitySet="ChangeLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChangeLog_Facility_Id" Association="Self.FK_ChangeLog_Facility_Id">
+            <End Role="Facility" EntitySet="Facility" />
+            <End Role="ChangeLog" EntitySet="ChangeLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_EmployeeType_Id" Association="Self.FK_Employee_EmployeeType_Id">
+            <End Role="EmployeeType" EntitySet="EmployeeType" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeTypeFacilityAccessibles_EmployeeType_Id" Association="Self.FK_EmployeeTypeFacilityAccessibles_EmployeeType_Id">
+            <End Role="EmployeeType" EntitySet="EmployeeType" />
+            <End Role="EmployeeTypeFacilityAccessibles" EntitySet="EmployeeTypeFacilityAccessibles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeTypeFacilityAccessibles_Facility_Id" Association="Self.FK_EmployeeTypeFacilityAccessibles_Facility_Id">
+            <End Role="Facility" EntitySet="Facility" />
+            <End Role="EmployeeTypeFacilityAccessibles" EntitySet="EmployeeTypeFacilityAccessibles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacilityPeriod_Facility_Id" Association="Self.FK_FacilityPeriod_Facility_Id">
+            <End Role="Facility" EntitySet="Facility" />
+            <End Role="FacilityPeriod" EntitySet="FacilityPeriod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacilityPeriod_Period_Id" Association="Self.FK_FacilityPeriod_Period_Id">
+            <End Role="SchoolPeriod" EntitySet="SchoolPeriod" />
+            <End Role="FacilityPeriod" EntitySet="FacilityPeriod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SHS_School_Period_SHS_School_Term" Association="Self.FK_SHS_School_Period_SHS_School_Term">
+            <End Role="SHS_School_Term" EntitySet="SHS_School_Term" />
+            <End Role="SHS_School_Period" EntitySet="SHS_School_Period" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MaintenanceWebUtilityDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChangeLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="FacilityId" Type="Int32" Nullable="false" />
+          <Property Name="ChangeDateCreated" Type="DateTime" Precision="3" />
+          <Property Name="ChangePerformed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_ChangeLog_Employee_Id" FromRole="ChangeLog" ToRole="Employee" />
+          <NavigationProperty Name="Facility" Relationship="Self.FK_ChangeLog_Facility_Id" FromRole="ChangeLog" ToRole="Facility" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordTxt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ChangeLogs" Relationship="Self.FK_ChangeLog_Employee_Id" FromRole="Employee" ToRole="ChangeLog" />
+          <NavigationProperty Name="EmployeeType" Relationship="Self.FK_Employee_EmployeeType_Id" FromRole="Employee" ToRole="EmployeeType" />
+        </EntityType>
+        <EntityType Name="EmployeeType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_EmployeeType_Id" FromRole="EmployeeType" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeTypeFacilityAccessibles" Relationship="Self.FK_EmployeeTypeFacilityAccessibles_EmployeeType_Id" FromRole="EmployeeType" ToRole="EmployeeTypeFacilityAccessibles" />
+        </EntityType>
+        <EntityType Name="EmployeeTypeFacilityAccessible">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeTypeId" Type="Int32" Nullable="false" />
+          <Property Name="FacilityId" Type="Int32" Nullable="false" />
+          <Property Name="IsAccessible" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EmployeeType" Relationship="Self.FK_EmployeeTypeFacilityAccessibles_EmployeeType_Id" FromRole="EmployeeTypeFacilityAccessibles" ToRole="EmployeeType" />
+          <NavigationProperty Name="Facility" Relationship="Self.FK_EmployeeTypeFacilityAccessibles_Facility_Id" FromRole="EmployeeTypeFacilityAccessibles" ToRole="Facility" />
+        </EntityType>
+        <EntityType Name="Facility">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FacilityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ChangeLogs" Relationship="Self.FK_ChangeLog_Facility_Id" FromRole="Facility" ToRole="ChangeLog" />
+          <NavigationProperty Name="EmployeeTypeFacilityAccessibles" Relationship="Self.FK_EmployeeTypeFacilityAccessibles_Facility_Id" FromRole="Facility" ToRole="EmployeeTypeFacilityAccessibles" />
+          <NavigationProperty Name="FacilityPeriods" Relationship="Self.FK_FacilityPeriod_Facility_Id" FromRole="Facility" ToRole="FacilityPeriod" />
+        </EntityType>
+        <EntityType Name="FacilityPeriod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FacilityId" Type="Int32" Nullable="false" />
+          <Property Name="PeriodId" Type="Int32" Nullable="false" />
+          <Property Name="EncodingStartDate" Type="DateTime" Precision="3" />
+          <Property Name="EncodingEndDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Facility" Relationship="Self.FK_FacilityPeriod_Facility_Id" FromRole="FacilityPeriod" ToRole="Facility" />
+          <NavigationProperty Name="SchoolPeriod" Relationship="Self.FK_FacilityPeriod_Period_Id" FromRole="FacilityPeriod" ToRole="SchoolPeriod" />
+        </EntityType>
+        <EntityType Name="SchoolPeriod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="SchoolYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SHSTerm" Type="Int32" Nullable="false" />
+          <Property Name="SHSTermStartingDate" Type="DateTime" Precision="3" />
+          <Property Name="SHSTermEndingDate" Type="DateTime" Precision="3" />
+          <Property Name="IsPeriodActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FacilityPeriods" Relationship="Self.FK_FacilityPeriod_Period_Id" FromRole="SchoolPeriod" ToRole="FacilityPeriod" />
+        </EntityType>
+        <EntityType Name="SHS_School_Period">
+          <Key>
+            <PropertyRef Name="Period_ID" />
+          </Key>
+          <Property Name="Period_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SHS_Term_Code" Type="Int32" Nullable="false" />
+          <Property Name="Period_Number" Type="Byte" Nullable="false" />
+          <Property Name="Period_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="School_Days" Type="Double" Nullable="false" />
+          <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+          <Property Name="Encoding_Start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Encoding_End" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Updated_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Updated_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Updated_Host" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Updated_App" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SHS_School_Term" Relationship="Self.FK_SHS_School_Period_SHS_School_Term" FromRole="SHS_School_Period" ToRole="SHS_School_Term" />
+        </EntityType>
+        <EntityType Name="SHS_School_Term">
+          <Key>
+            <PropertyRef Name="SHS_Term_Code" />
+          </Key>
+          <Property Name="SHS_Term_Code" Type="Int32" Nullable="false" />
+          <Property Name="School_Year" Type="Int16" Nullable="false" />
+          <Property Name="School_Term_Number" Type="Byte" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Start" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Date_End" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+          <Property Name="Graduation_Date" Type="DateTime" Precision="0" />
+          <Property Name="Enrollment_Date_Start" Type="DateTime" Precision="0" />
+          <Property Name="Enrollment_Date_End" Type="DateTime" Precision="0" />
+          <Property Name="College_Term_Code" Type="Int32" Nullable="false" />
+          <Property Name="Updated_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Updated_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Updated_Host" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Updated_App" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SHS_School_Period" Relationship="Self.FK_SHS_School_Period_SHS_School_Term" FromRole="SHS_School_Term" ToRole="SHS_School_Period" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_ChangeLog_Employee_Id">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="ChangeLog" Type="Self.ChangeLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChangeLog">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChangeLog_Facility_Id">
+          <End Role="Facility" Type="Self.Facility" Multiplicity="1" />
+          <End Role="ChangeLog" Type="Self.ChangeLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facility">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChangeLog">
+              <PropertyRef Name="FacilityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_EmployeeType_Id">
+          <End Role="EmployeeType" Type="Self.EmployeeType" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeTypeFacilityAccessibles_EmployeeType_Id">
+          <End Role="EmployeeType" Type="Self.EmployeeType" Multiplicity="1" />
+          <End Role="EmployeeTypeFacilityAccessibles" Type="Self.EmployeeTypeFacilityAccessible" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeTypeFacilityAccessibles">
+              <PropertyRef Name="EmployeeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeTypeFacilityAccessibles_Facility_Id">
+          <End Role="Facility" Type="Self.Facility" Multiplicity="1" />
+          <End Role="EmployeeTypeFacilityAccessibles" Type="Self.EmployeeTypeFacilityAccessible" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facility">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeTypeFacilityAccessibles">
+              <PropertyRef Name="FacilityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacilityPeriod_Facility_Id">
+          <End Role="Facility" Type="Self.Facility" Multiplicity="1" />
+          <End Role="FacilityPeriod" Type="Self.FacilityPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facility">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacilityPeriod">
+              <PropertyRef Name="FacilityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacilityPeriod_Period_Id">
+          <End Role="SchoolPeriod" Type="Self.SchoolPeriod" Multiplicity="1" />
+          <End Role="FacilityPeriod" Type="Self.FacilityPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolPeriod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacilityPeriod">
+              <PropertyRef Name="PeriodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SHS_School_Period_SHS_School_Term">
+          <End Role="SHS_School_Term" Type="Self.SHS_School_Term" Multiplicity="1" />
+          <End Role="SHS_School_Period" Type="Self.SHS_School_Period" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SHS_School_Term">
+              <PropertyRef Name="SHS_Term_Code" />
+            </Principal>
+            <Dependent Role="SHS_School_Period">
+              <PropertyRef Name="SHS_Term_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MaintenanceWebUtilityDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
+          <EntitySet Name="ChangeLogs" EntityType="Self.ChangeLog" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="EmployeeTypes" EntityType="Self.EmployeeType" />
+          <EntitySet Name="EmployeeTypeFacilityAccessibles" EntityType="Self.EmployeeTypeFacilityAccessible" />
+          <EntitySet Name="Facilities" EntityType="Self.Facility" />
+          <EntitySet Name="FacilityPeriods" EntityType="Self.FacilityPeriod" />
+          <EntitySet Name="SchoolPeriods" EntityType="Self.SchoolPeriod" />
+          <EntitySet Name="SHS_School_Period" EntityType="Self.SHS_School_Period" />
+          <EntitySet Name="SHS_School_Term" EntityType="Self.SHS_School_Term" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_ChangeLog_Employee_Id" Association="Self.FK_ChangeLog_Employee_Id">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="ChangeLog" EntitySet="ChangeLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChangeLog_Facility_Id" Association="Self.FK_ChangeLog_Facility_Id">
+            <End Role="Facility" EntitySet="Facilities" />
+            <End Role="ChangeLog" EntitySet="ChangeLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_EmployeeType_Id" Association="Self.FK_Employee_EmployeeType_Id">
+            <End Role="EmployeeType" EntitySet="EmployeeTypes" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeTypeFacilityAccessibles_EmployeeType_Id" Association="Self.FK_EmployeeTypeFacilityAccessibles_EmployeeType_Id">
+            <End Role="EmployeeType" EntitySet="EmployeeTypes" />
+            <End Role="EmployeeTypeFacilityAccessibles" EntitySet="EmployeeTypeFacilityAccessibles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeTypeFacilityAccessibles_Facility_Id" Association="Self.FK_EmployeeTypeFacilityAccessibles_Facility_Id">
+            <End Role="Facility" EntitySet="Facilities" />
+            <End Role="EmployeeTypeFacilityAccessibles" EntitySet="EmployeeTypeFacilityAccessibles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacilityPeriod_Facility_Id" Association="Self.FK_FacilityPeriod_Facility_Id">
+            <End Role="Facility" EntitySet="Facilities" />
+            <End Role="FacilityPeriod" EntitySet="FacilityPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacilityPeriod_Period_Id" Association="Self.FK_FacilityPeriod_Period_Id">
+            <End Role="SchoolPeriod" EntitySet="SchoolPeriods" />
+            <End Role="FacilityPeriod" EntitySet="FacilityPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SHS_School_Period_SHS_School_Term" Association="Self.FK_SHS_School_Period_SHS_School_Term">
+            <End Role="SHS_School_Term" EntitySet="SHS_School_Term" />
+            <End Role="SHS_School_Period" EntitySet="SHS_School_Period" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(MaintenanceWebUtilityDbModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(MaintenanceWebUtilityDbModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="uspEditFacilityPeriod">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="EncodingStartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EncodingEndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="uspGetActiveFacilityPeriod" ReturnType="Collection(MaintenanceWebUtilityDbModel.uspGetActiveFacilityPeriod_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspGetEmpAccessibles" ReturnType="Collection(MaintenanceWebUtilityDbModel.uspGetEmpAccessibles_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspInsertChangeLog">
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="FacilityId" Mode="In" Type="Int32" />
+            <Parameter Name="ChangePerformed" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspValidateUser" ReturnType="Collection(Int32)">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="uspGetActiveFacilityPeriod_Result">
+          <Property Type="Int32" Name="PeriodId" Nullable="false" />
+          <Property Type="DateTime" Name="EncodingStartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EncodingEndDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="uspGetEmpAccessibles_Result">
+          <Property Type="Int32" Name="FacilityId" Nullable="false" />
+          <Property Type="Boolean" Name="IsAccessible" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MaintenanceWebUtilityDbModelStoreContainer" CdmEntityContainer="MaintenanceWebUtilityDbEntities">
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="MaintenanceWebUtilityDbModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChangeLogs">
+            <EntityTypeMapping TypeName="MaintenanceWebUtilityDbModel.ChangeLog">
+              <MappingFragment StoreEntitySet="ChangeLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+                <ScalarProperty Name="ChangeDateCreated" ColumnName="ChangeDateCreated" />
+                <ScalarProperty Name="ChangePerformed" ColumnName="ChangePerformed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="MaintenanceWebUtilityDbModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeTypeId" ColumnName="EmployeeTypeId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="PasswordTxt" ColumnName="PasswordTxt" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeTypes">
+            <EntityTypeMapping TypeName="MaintenanceWebUtilityDbModel.EmployeeType">
+              <MappingFragment StoreEntitySet="EmployeeType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeTypeName" ColumnName="EmployeeTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeTypeFacilityAccessibles">
+            <EntityTypeMapping TypeName="MaintenanceWebUtilityDbModel.EmployeeTypeFacilityAccessible">
+              <MappingFragment StoreEntitySet="EmployeeTypeFacilityAccessibles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeTypeId" ColumnName="EmployeeTypeId" />
+                <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+                <ScalarProperty Name="IsAccessible" ColumnName="IsAccessible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facilities">
+            <EntityTypeMapping TypeName="MaintenanceWebUtilityDbModel.Facility">
+              <MappingFragment StoreEntitySet="Facility">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FacilityName" ColumnName="FacilityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacilityPeriods">
+            <EntityTypeMapping TypeName="MaintenanceWebUtilityDbModel.FacilityPeriod">
+              <MappingFragment StoreEntitySet="FacilityPeriod">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+                <ScalarProperty Name="PeriodId" ColumnName="PeriodId" />
+                <ScalarProperty Name="EncodingStartDate" ColumnName="EncodingStartDate" />
+                <ScalarProperty Name="EncodingEndDate" ColumnName="EncodingEndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SchoolPeriods">
+            <EntityTypeMapping TypeName="MaintenanceWebUtilityDbModel.SchoolPeriod">
+              <MappingFragment StoreEntitySet="SchoolPeriod">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SchoolYear" ColumnName="SchoolYear" />
+                <ScalarProperty Name="SHSTerm" ColumnName="SHSTerm" />
+                <ScalarProperty Name="SHSTermStartingDate" ColumnName="SHSTermStartingDate" />
+                <ScalarProperty Name="SHSTermEndingDate" ColumnName="SHSTermEndingDate" />
+                <ScalarProperty Name="IsPeriodActive" ColumnName="IsPeriodActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SHS_School_Period">
+            <EntityTypeMapping TypeName="MaintenanceWebUtilityDbModel.SHS_School_Period">
+              <MappingFragment StoreEntitySet="SHS_School_Period">
+                <ScalarProperty Name="Period_ID" ColumnName="Period_ID" />
+                <ScalarProperty Name="SHS_Term_Code" ColumnName="SHS_Term_Code" />
+                <ScalarProperty Name="Period_Number" ColumnName="Period_Number" />
+                <ScalarProperty Name="Period_Description" ColumnName="Period_Description" />
+                <ScalarProperty Name="School_Days" ColumnName="School_Days" />
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+                <ScalarProperty Name="Encoding_Start" ColumnName="Encoding_Start" />
+                <ScalarProperty Name="Encoding_End" ColumnName="Encoding_End" />
+                <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+                <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
+                <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+                <ScalarProperty Name="Updated_App" ColumnName="Updated_App" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SHS_School_Term">
+            <EntityTypeMapping TypeName="MaintenanceWebUtilityDbModel.SHS_School_Term">
+              <MappingFragment StoreEntitySet="SHS_School_Term">
+                <ScalarProperty Name="SHS_Term_Code" ColumnName="SHS_Term_Code" />
+                <ScalarProperty Name="School_Year" ColumnName="School_Year" />
+                <ScalarProperty Name="School_Term_Number" ColumnName="School_Term_Number" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_End" ColumnName="Date_End" />
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+                <ScalarProperty Name="Graduation_Date" ColumnName="Graduation_Date" />
+                <ScalarProperty Name="Enrollment_Date_Start" ColumnName="Enrollment_Date_Start" />
+                <ScalarProperty Name="Enrollment_Date_End" ColumnName="Enrollment_Date_End" />
+                <ScalarProperty Name="College_Term_Code" ColumnName="College_Term_Code" />
+                <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+                <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
+                <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+                <ScalarProperty Name="Updated_App" ColumnName="Updated_App" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MaintenanceWebUtilityDbModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="MaintenanceWebUtilityDbModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="MaintenanceWebUtilityDbModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="MaintenanceWebUtilityDbModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="MaintenanceWebUtilityDbModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaintenanceWebUtilityDbModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="MaintenanceWebUtilityDbModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaintenanceWebUtilityDbModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="MaintenanceWebUtilityDbModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="MaintenanceWebUtilityDbModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="uspEditFacilityPeriod" FunctionName="MaintenanceWebUtilityDbModel.Store.uspEditFacilityPeriod" />
+          <FunctionImportMapping FunctionImportName="uspGetActiveFacilityPeriod" FunctionName="MaintenanceWebUtilityDbModel.Store.uspGetActiveFacilityPeriod">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaintenanceWebUtilityDbModel.uspGetActiveFacilityPeriod_Result">
+                <ScalarProperty Name="PeriodId" ColumnName="PeriodId" />
+                <ScalarProperty Name="EncodingStartDate" ColumnName="EncodingStartDate" />
+                <ScalarProperty Name="EncodingEndDate" ColumnName="EncodingEndDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspGetEmpAccessibles" FunctionName="MaintenanceWebUtilityDbModel.Store.uspGetEmpAccessibles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaintenanceWebUtilityDbModel.uspGetEmpAccessibles_Result">
+                <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+                <ScalarProperty Name="IsAccessible" ColumnName="IsAccessible" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspInsertChangeLog" FunctionName="MaintenanceWebUtilityDbModel.Store.uspInsertChangeLog" />
+          <FunctionImportMapping FunctionImportName="uspValidateUser" FunctionName="MaintenanceWebUtilityDbModel.Store.uspValidateUser" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

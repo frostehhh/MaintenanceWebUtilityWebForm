@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="87b2a314e1734a7aa450617840d6523c" Name="Diagram1">
+        <EntityTypeShape EntityType="MaintenanceWebUtilityDbModel.C__RefactorLog" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaintenanceWebUtilityDbModel.ChangeLog" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaintenanceWebUtilityDbModel.Employee" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaintenanceWebUtilityDbModel.EmployeeType" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaintenanceWebUtilityDbModel.EmployeeTypeFacilityAccessible" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaintenanceWebUtilityDbModel.Facility" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaintenanceWebUtilityDbModel.FacilityPeriod" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaintenanceWebUtilityDbModel.SchoolPeriod" Width="1.5" PointX="3.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaintenanceWebUtilityDbModel.SHS_School_Period" Width="1.5" PointX="8" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaintenanceWebUtilityDbModel.SHS_School_Term" Width="1.5" PointX="5.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaintenanceWebUtilityDbModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="MaintenanceWebUtilityDbModel.FK_ChangeLog_Employee_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="MaintenanceWebUtilityDbModel.FK_ChangeLog_Facility_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="MaintenanceWebUtilityDbModel.FK_Employee_EmployeeType_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="MaintenanceWebUtilityDbModel.FK_EmployeeTypeFacilityAccessibles_EmployeeType_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="MaintenanceWebUtilityDbModel.FK_EmployeeTypeFacilityAccessibles_Facility_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="MaintenanceWebUtilityDbModel.FK_FacilityPeriod_Facility_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="MaintenanceWebUtilityDbModel.FK_FacilityPeriod_Period_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="MaintenanceWebUtilityDbModel.FK_SHS_School_Period_SHS_School_Term" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
