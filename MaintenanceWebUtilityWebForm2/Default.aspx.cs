@@ -14,6 +14,7 @@ namespace MaintenanceWebUtilityWebForm2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            #region uspGetEmpAccessibles then display in page
             Dictionary<int, bool> empAccessiblesDict = new Dictionary<int, bool>();
             if (Session[SessionKey.UserId] == null)
             {
@@ -133,6 +134,26 @@ namespace MaintenanceWebUtilityWebForm2
                     }
                 }
             }
+            #endregion
+        }
+
+        public IQueryable<SHS_School_Term> GetSchoolTerm(object sender, EventArgs e)
+        {
+            var _db = new MaintenanceWebUtilityDbEntities();
+            MaintenanceWebUtilityDbEntities _context = new MaintenanceWebUtilityDbEntities();
+
+            var query = _context.SHS_School_Term;
+            return query;
+        }
+
+        public IQueryable<SHS_School_Period> GetSchoolPeriod(object sender, EventArgs e)
+        {
+            var _db = new MaintenanceWebUtilityDbEntities();
+            MaintenanceWebUtilityDbEntities _context = new MaintenanceWebUtilityDbEntities();
+
+            var query = _context.SHS_School_Period;
+            return query;
         }
     }
 }
+ 

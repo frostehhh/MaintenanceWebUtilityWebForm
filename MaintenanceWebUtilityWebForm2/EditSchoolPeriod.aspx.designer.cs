@@ -10,33 +10,24 @@
 namespace MaintenanceWebUtilityWebForm2 {
     
     
-    public partial class _Default {
+    public partial class EditSchoolPeriod {
         
         /// <summary>
-        /// empAccessibleLiteral control.
+        /// SHS_School_Period_FormView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal empAccessibleLiteral;
+        protected global::System.Web.UI.WebControls.FormView SHS_School_Period_FormView;
         
         /// <summary>
-        /// GridView1 control.
+        /// UpdateBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
-        
-        /// <summary>
-        /// GridView2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView2;
+        protected global::System.Web.UI.WebControls.Button UpdateBtn;
     }
 }

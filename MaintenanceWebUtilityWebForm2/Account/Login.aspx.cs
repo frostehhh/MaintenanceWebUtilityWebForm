@@ -17,7 +17,7 @@ namespace MaintenanceWebUtilityWebForm
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            this.Form.DefaultButton = this.Login1.FindControl("LoginButton").UniqueID;
         }
 
         protected void ValidateUser(object sender, EventArgs e)

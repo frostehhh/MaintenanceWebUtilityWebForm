@@ -76,8 +76,6 @@ namespace MaintenanceWebUtilityWebForm2.Facilities
 
             var _context = new MaintenanceWebUtilityDbEntities();
 
-
-
             // get values from form
             var row = FacilityPeriodDetailsGridView.Rows[0];
             TextBox encodingStartDateTextBox = (TextBox)row.FindControl("EncodingStartDate");
@@ -91,7 +89,7 @@ namespace MaintenanceWebUtilityWebForm2.Facilities
             DateTime encodingStartDate = Convert.ToDateTime(encodingStartDateTextBox.Text);
             DateTime encodingEndDate = Convert.ToDateTime(encodingEndDateTextBox.Text);
             DateTime initialEncodingEndDate = Convert.ToDateTime(initialEncodingEndDateHiddenField.Value);
-            DateTime changedEncodingEndDate = (DateTime.TryParse(changedEncodingEndDateHiddenField.Value, out tempDateTime)) ? tempDateTime : default(DateTime);
+            DateTime changedEncodingEndDate = (DateTime.TryParse(changedEncodingEndDateHiddenField.Value, out changedEncodingEndDate)) ? changedEncodingEndDate : default(DateTime);
             bool isEncodingEndDateChanged = (isEncodingEndDateChangedHiddenField.Value == "true") ? true : false;
 
 

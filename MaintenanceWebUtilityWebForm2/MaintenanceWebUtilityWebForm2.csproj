@@ -146,6 +146,8 @@
     <Content Include="Content\v4-shims.css" />
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="Default.aspx" />
+    <Content Include="EditSchoolPeriod.aspx" />
+    <Content Include="EditSchoolTerm.aspx" />
     <Content Include="Facilities\Edit.aspx" />
     <Content Include="Facilities\Index.aspx" />
     <Content Include="favicon.ico" />
@@ -305,6 +307,20 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditSchoolPeriod.aspx.cs">
+      <DependentUpon>EditSchoolPeriod.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditSchoolPeriod.aspx.designer.cs">
+      <DependentUpon>EditSchoolPeriod.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditSchoolTerm.aspx.cs">
+      <DependentUpon>EditSchoolTerm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditSchoolTerm.aspx.designer.cs">
+      <DependentUpon>EditSchoolTerm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>MaintenanceWebUtilityModel.tt</DependentUpon>
