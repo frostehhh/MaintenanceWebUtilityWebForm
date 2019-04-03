@@ -13,7 +13,7 @@
         <asp:Literal runat="server" id="empAccessibleLiteral" />
     </div>
 
-    <asp:GridView ID="GridView1" runat="server" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTerm" CssClass="">
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTerm" CssClass="table">
         <Columns>
             <asp:HyperLinkField DataNavigateUrlFields="SHS_Term_Code" DataNavigateUrlFormatString="./EditSchoolTerm.aspx?SHSTermCode={0}" Text="Edit"/>
             <asp:BoundField DataField="SHS_Term_Code" HeaderText="SHS_Term_Code" ReadOnly="True" SortExpression="SHS_Term_Code" />
@@ -34,9 +34,8 @@
         </Columns>
     </asp:GridView>
 
-    <asp:GridView ID="GridView2" runat="server" DataKeyNames="Period_ID" SelectMethod="GetSchoolPeriod" CssClass="">
+    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" DataKeyNames="Period_ID" SelectMethod="GetSchoolPeriod" CssClass="table">
         <Columns>
-            <asp:HyperLinkField DataNavigateUrlFields="Period_ID" DataNavigateUrlFormatString="./EditSchoolPeriod.aspx?PeriodId={0}" Text="Edit"/>
             <asp:BoundField DataField="Period_ID" HeaderText="Period_ID" ReadOnly="True" SortExpression="Period_ID" />
             <asp:BoundField DataField="SHS_Term_Code" HeaderText="SHS_Term_Code" ReadOnly="True" SortExpression="SHS_Term_Code" />
             <asp:BoundField DataField="Period_Number" HeaderText="Period_Number" ReadOnly="True" SortExpression="Period_Number" />
@@ -49,6 +48,7 @@
             <asp:BoundField DataField="Updated_By" HeaderText="Updated_By" ReadOnly="True" SortExpression="Updated_By" />
             <asp:BoundField DataField="Updated_Host" HeaderText="Updated_Host" ReadOnly="True" SortExpression="Updated_Host" />
             <asp:BoundField DataField="Updated_App" HeaderText="Updated_App" ReadOnly="True" SortExpression="Updated_App" />
+            <asp:HyperLinkField DataNavigateUrlFields="Period_ID" DataNavigateUrlFormatString="./EditSchoolPeriod.aspx?PeriodId={0}" Text="Edit"/>
         </Columns>
     </asp:GridView>
 
