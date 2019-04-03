@@ -47,7 +47,7 @@ namespace MaintenanceWebUtilityWebForm2.Facilities
                      
                     string indexLiteralTemp = "";
                     indexLiteral.Text = String.Concat(indexLiteral.Text, indexLiteralTemp);
-                    
+                    bobo ka
                 }
             }*/
         }
