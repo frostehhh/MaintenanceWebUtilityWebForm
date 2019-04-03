@@ -13,7 +13,7 @@
         <asp:Literal runat="server" id="empAccessibleLiteral" />
     </div>
 
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTerm" CssClass="table">
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTerm" CssClass="datatable">
         <Columns>
             <asp:HyperLinkField DataNavigateUrlFields="SHS_Term_Code" DataNavigateUrlFormatString="./EditSchoolTerm.aspx?SHSTermCode={0}" Text="Edit"/>
             <asp:BoundField DataField="SHS_Term_Code" HeaderText="SHS_Term_Code" ReadOnly="True" SortExpression="SHS_Term_Code" />
@@ -34,7 +34,7 @@
         </Columns>
     </asp:GridView>
 
-    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" DataKeyNames="Period_ID" SelectMethod="GetSchoolPeriod" CssClass="table">
+    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" DataKeyNames="Period_ID" SelectMethod="GetSchoolPeriod" CssClass="datatable">
         <Columns>
             <asp:BoundField DataField="Period_ID" HeaderText="Period_ID" ReadOnly="True" SortExpression="Period_ID" />
             <asp:BoundField DataField="SHS_Term_Code" HeaderText="SHS_Term_Code" ReadOnly="True" SortExpression="SHS_Term_Code" />
