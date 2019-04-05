@@ -14,23 +14,9 @@ namespace MaintenanceWebUtilityWebForm2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                List<string> list = new List<string>()
-             {
-                "1",
-                "2",
-                "3",
-                "4"
-             };
-                var dropdownlistSchool_Term_Number = (DropDownList)this.SHS_Term_Code_FormView.FindControl("School_Term_Number");
-                dropdownlistSchool_Term_Number.DataSource = list;
-                dropdownlistSchool_Term_Number.DataTextField = "SchoolTermNumberTextField";
-                dropdownlistSchool_Term_Number.DataValueField = "SchoolTermNumberValueField";
-                //dropdownlistSchool_Term_Number.SelectedValue = 
-                dropdownlistSchool_Term_Number.DataBind();
-            }
+            
         }
+
         public IQueryable<SHS_School_Term> GetSchoolTermDetails()
         {
             var schoolTermCode = Convert.ToInt32(Request.QueryString["SHSTermCode"]);
