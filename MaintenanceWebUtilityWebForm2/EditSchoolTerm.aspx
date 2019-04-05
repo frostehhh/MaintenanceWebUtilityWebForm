@@ -50,7 +50,7 @@
                 </tr>
                 <tr>
                     <td><asp:Label runat="server" Text="Updated_Date"></asp:Label></td>
-                    <td><asp:TextBox ID="Updated_Date" type="datetime-local" Width="240" runat="server" value='<%#:Item.Updated_Date.ToString("yyyy-MM-ddTHH:mm:ss")%>' CssClass="form-control valid" ></asp:TextBox></td>
+                    <td><asp:TextBox ID="Updated_Date" type="datetime-local" Width="240"  runat="server" value='<%#:Item.Updated_Date.ToString("yyyy-MM-ddTHH:mm:ss")%>' CssClass="form-control valid" ></asp:TextBox></td>
                 </tr>
                 <tr>
                     <td><asp:Label runat="server" Text="Updated_By"></asp:Label></td>
