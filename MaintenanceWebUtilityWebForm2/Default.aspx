@@ -15,7 +15,6 @@
 
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTerm" CssClass="datatable">
         <Columns>
-            <asp:HyperLinkField DataNavigateUrlFields="SHS_Term_Code" DataNavigateUrlFormatString="./EditSchoolTerm.aspx?SHSTermCode={0}" Text="Edit"/>
             <asp:BoundField DataField="SHS_Term_Code" HeaderText="SHS_Term_Code" ReadOnly="True" SortExpression="SHS_Term_Code" />
             <asp:BoundField DataField="School_Year" HeaderText="School_Year" ReadOnly="True" SortExpression="School_Year" />
             <asp:BoundField DataField="School_Term_Number" HeaderText="School_Term_Number" ReadOnly="True" SortExpression="School_Term_Number" />
@@ -31,6 +30,7 @@
             <asp:BoundField DataField="Updated_By" HeaderText="Updated_By" ReadOnly="True" SortExpression="Updated_By" />
             <asp:BoundField DataField="Updated_Host" HeaderText="Updated_Host" ReadOnly="True" SortExpression="Updated_Host" />
             <asp:BoundField DataField="Updated_App" HeaderText="Updated_App" ReadOnly="True" SortExpression="Updated_App" />
+            <asp:HyperLinkField DataNavigateUrlFields="SHS_Term_Code" DataNavigateUrlFormatString="./EditSchoolTerm.aspx?SHSTermCode={0}" Text="Edit"/>
         </Columns>
     </asp:GridView>
 
