@@ -14,7 +14,7 @@
                 </tr>
                 <tr>
                     <td><asp:Label runat="server" Text="School_Term_Number"></asp:Label></td>
-                    <td><asp:TextBox ID="School_Term_Number"  Width="240" runat="server" value='<%#:Item.School_Term_Number%>' CssClass="form-control valid" ></asp:TextBox></td>
+                    <td><asp:DropDownList ID="School_Term_Number"  Width="240" runat="server" AutoPostBack="true" CssClass="form-control valid" ></asp:DropDownList></td>
                 </tr>
                 <tr>
                     <td><asp:Label runat="server" Text="Description"></asp:Label></td>
