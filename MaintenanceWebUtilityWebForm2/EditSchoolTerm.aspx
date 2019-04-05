@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditSchoolTerm.aspx.cs" Inherits="MaintenanceWebUtilityWebForm2.EditSchoolTerm" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Edit SHS Term Code</h1>
+
     <asp:FormView ID="SHS_Term_Code_FormView" runat="server" AutoGenerateColumns="False" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTermDetails" ItemType="MaintenanceWebUtilityWebForm2.SHS_School_Term">
         <ItemTemplate>
             <table>
@@ -14,7 +15,8 @@
                 </tr>
                 <tr>
                     <td><asp:Label runat="server" Text="School_Term_Number"></asp:Label></td>
-                    <td><asp:DropDownList ID="School_Term_Number"  Width="240" runat="server" AutoPostBack="true" CssClass="form-control valid" ></asp:DropDownList></td>
+                    <td><asp:DropDownList ID="School_Term_Number"  Width="240" runat="server" AutoPostBack="true" CssClass="form-control valid" />
+                    </td>
                 </tr>
                 <tr>
                     <td><asp:Label runat="server" Text="Description"></asp:Label></td>
