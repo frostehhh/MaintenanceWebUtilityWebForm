@@ -50,11 +50,13 @@ namespace MaintenanceWebUtilityWebForm2
                     // if user is admin
                     if(!(userEmployeeType.ToString().Equals("1"))) 
                     {
+                    
                         FormView fv = (FormView)sender;
                         fv.FindControl("Updated_Date").Visible = false;
                         fv.FindControl("Updated_By").Visible = false;
                         fv.FindControl("Updated_Host").Visible = false;
                         fv.FindControl("Updated_App").Visible = false;
+
                         fv.FindControl("Updated_Date_Lbl").Visible = false;
                         fv.FindControl("Updated_By_Lbl").Visible = false;
                         fv.FindControl("Updated_Host_Lbl").Visible = false;
@@ -107,7 +109,15 @@ namespace MaintenanceWebUtilityWebForm2
             DateTime enrollmentDateStart = DateTime.TryParse(enrollmentDateStartTextBox.Text, out enrollmentDateStart) ? Convert.ToDateTime(enrollmentDateStartTextBox.Text) : default(DateTime);
             DateTime enrollmentDateEnd = DateTime.TryParse(enrollmentDateEndTextBox.Text, out enrollmentDateEnd) ? Convert.ToDateTime(enrollmentDateEndTextBox.Text) : default(DateTime);
             int collegeTermCode = Convert.ToInt32(collegeTermCodeTextBox.Text);
-            DateTime updatedDate = Convert.ToDateTime(updatedDateTextBox.Text);
+            DateTime updatedDate;
+            if (updatedAppTextBox.Visible == true)
+            {
+                updatedDate = Convert.ToDateTime(updatedDateTextBox.Text);
+            }
+            else
+            {
+                updatedDate = default(DateTime);
+            }
             string updatedBy = updatedByTextBox.Text;
             string updatedHost = updatedHostTextBox.Text;
             string updatedApp = updatedAppTextBox.Text;
@@ -153,11 +163,39 @@ namespace MaintenanceWebUtilityWebForm2
                     }
 
                     cmd.Parameters.AddWithValue("@College_Term_Code", collegeTermCode);
-                    cmd.Parameters.AddWithValue("@Updated_Date", updatedDate);
-                    cmd.Parameters.AddWithValue("@Updated_By", updatedBy);
-                    cmd.Parameters.AddWithValue("@Updated_Host", updatedHost);
-                    cmd.Parameters.AddWithValue("@Updated_App", updatedApp);
 
+                    if (updatedDate == default(DateTime))
+                    {
+                        cmd.Parameters.AddWithValue("@Updated_Date", updatedDate).Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Updated_Date", updatedDate);
+                    }
+                    if(updatedBy.Equals(""))
+                    {
+                        cmd.Parameters.AddWithValue("Updated_By", updatedBy).Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("Updated_By", updatedBy);
+                    }
+                    if (updatedHost.Equals(""))
+                    {
+                        cmd.Parameters.AddWithValue("Updated_Host", updatedHost).Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("Updated_Host", updatedHost);
+                    }
+                    if (updatedApp.Equals(""))
+                    {
+                        cmd.Parameters.AddWithValue("Updated_App", updatedApp).Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("Updated_App", updatedApp);
+                    }
                     cmd.Connection = con;
                     con.Open();
                     cmd.ExecuteNonQuery();
