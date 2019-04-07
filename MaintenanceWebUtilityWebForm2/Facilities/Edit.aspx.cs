@@ -86,7 +86,7 @@ namespace MaintenanceWebUtilityWebForm2.Facilities
 
             int facilityPeriodId = Convert.ToInt32(FacilityPeriodDetailsGridView.DataKeys[0]["Id"].ToString());
             int facilityId = Convert.ToInt32(FacilityPeriodDetailsGridView.DataKeys[0]["FacilityId"].ToString());
-            DateTime encodingStartDate = Convert.ToDateTime(encodingStartDateTextBox.Text);
+            DateTime encodingStartDate = DateTime.TryParse(encodingStartDateTextBox.Text, out encodingStartDate) ? Convert.ToDateTime(encodingStartDateTextBox.Text) : default(DateTime);
             DateTime encodingEndDate = Convert.ToDateTime(encodingEndDateTextBox.Text);
             DateTime initialEncodingEndDate = Convert.ToDateTime(initialEncodingEndDateHiddenField.Value);
             DateTime changedEncodingEndDate = (DateTime.TryParse(changedEncodingEndDateHiddenField.Value, out changedEncodingEndDate)) ? changedEncodingEndDate : default(DateTime);
@@ -113,8 +113,24 @@ namespace MaintenanceWebUtilityWebForm2.Facilities
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@Id", facilityPeriodId);
-                        cmd.Parameters.AddWithValue("@EncodingStartDate", encodingStartDate);
-                        cmd.Parameters.AddWithValue("@EncodingEndDate", encodingEndDate);
+
+                        if(encodingStartDate == default(DateTime))
+                        {
+                            cmd.Parameters.AddWithValue("@EncodingStartDate", encodingStartDate).Value = DBNull.Value;
+                        }
+                        else
+                        {
+                            cmd.Parameters.AddWithValue("@EncodingStartDate", encodingStartDate);
+                        }
+                        if (encodingEndDate == default(DateTime))
+                        {
+                            cmd.Parameters.AddWithValue("@EncodingEndDate", encodingEndDate).Value = DBNull.Value;
+                        }
+                        else
+                        {
+                            cmd.Parameters.AddWithValue("@EncodingEndDate", encodingEndDate);
+                        }
+
                         cmd.Connection = con;
                         con.Open();
                         cmd.ExecuteNonQuery();

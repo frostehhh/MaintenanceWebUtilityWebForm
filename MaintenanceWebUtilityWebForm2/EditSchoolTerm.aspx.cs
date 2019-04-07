@@ -67,9 +67,9 @@ namespace MaintenanceWebUtilityWebForm2
             DateTime dateStart = Convert.ToDateTime(dateStartTextBox.Text);
             DateTime dateEnd = Convert.ToDateTime(dateEndTextBox.Text);
             bool isActive = Convert.ToBoolean(isActiveTextBox.Text);
-            DateTime graduationDate = DateTime.TryParse(graduationDateTextBox.Text, out graduationDate) ? Convert.ToDateTime(graduationDateTextBox.Text) : new DateTime();
-            DateTime enrollmentDateStart = DateTime.TryParse(enrollmentDateStartTextBox.Text, out enrollmentDateStart) ? Convert.ToDateTime(enrollmentDateStartTextBox.Text) : new DateTime();
-            DateTime enrollmentDateEnd = DateTime.TryParse(enrollmentDateEndTextBox.Text, out enrollmentDateEnd) ? Convert.ToDateTime(enrollmentDateEndTextBox.Text) : new DateTime();
+            DateTime graduationDate = DateTime.TryParse(graduationDateTextBox.Text, out graduationDate) ? Convert.ToDateTime(graduationDateTextBox.Text) : default(DateTime);
+            DateTime enrollmentDateStart = DateTime.TryParse(enrollmentDateStartTextBox.Text, out enrollmentDateStart) ? Convert.ToDateTime(enrollmentDateStartTextBox.Text) : default(DateTime);
+            DateTime enrollmentDateEnd = DateTime.TryParse(enrollmentDateEndTextBox.Text, out enrollmentDateEnd) ? Convert.ToDateTime(enrollmentDateEndTextBox.Text) : default(DateTime);
             int collegeTermCode = Convert.ToInt32(collegeTermCodeTextBox.Text);
             DateTime updatedDate = Convert.ToDateTime(updatedDateTextBox.Text);
             string updatedBy = updatedByTextBox.Text;
