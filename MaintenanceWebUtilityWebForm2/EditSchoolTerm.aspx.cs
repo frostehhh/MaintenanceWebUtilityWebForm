@@ -67,9 +67,9 @@ namespace MaintenanceWebUtilityWebForm2
             DateTime dateStart = Convert.ToDateTime(dateStartTextBox.Text);
             DateTime dateEnd = Convert.ToDateTime(dateEndTextBox.Text);
             bool isActive = Convert.ToBoolean(isActiveTextBox.Text);
-            DateTime graduationDate = DateTime.TryParse(graduationDateTextBox.Text, out graduationDate) ? Convert.ToDateTime(graduationDateTextBox.Text) : new DateTime(2000, 1, 1);
-            DateTime enrollmentDateStart = DateTime.TryParse(enrollmentDateStartTextBox.Text, out enrollmentDateStart) ? Convert.ToDateTime(enrollmentDateStartTextBox.Text) : new DateTime(2000, 1, 1);
-            DateTime enrollmentDateEnd = DateTime.TryParse(enrollmentDateEndTextBox.Text, out enrollmentDateEnd) ? Convert.ToDateTime(enrollmentDateEndTextBox.Text) : new DateTime(2000, 1, 1);
+            DateTime graduationDate = DateTime.TryParse(graduationDateTextBox.Text, out graduationDate) ? Convert.ToDateTime(graduationDateTextBox.Text) : new DateTime();
+            DateTime enrollmentDateStart = DateTime.TryParse(enrollmentDateStartTextBox.Text, out enrollmentDateStart) ? Convert.ToDateTime(enrollmentDateStartTextBox.Text) : new DateTime();
+            DateTime enrollmentDateEnd = DateTime.TryParse(enrollmentDateEndTextBox.Text, out enrollmentDateEnd) ? Convert.ToDateTime(enrollmentDateEndTextBox.Text) : new DateTime();
             int collegeTermCode = Convert.ToInt32(collegeTermCodeTextBox.Text);
             DateTime updatedDate = Convert.ToDateTime(updatedDateTextBox.Text);
             string updatedBy = updatedByTextBox.Text;
@@ -90,9 +90,32 @@ namespace MaintenanceWebUtilityWebForm2
                     cmd.Parameters.AddWithValue("@Date_Start", dateStart);
                     cmd.Parameters.AddWithValue("@Date_End", dateEnd);
                     cmd.Parameters.AddWithValue("@Is_Active", isActive);
-                    cmd.Parameters.AddWithValue("@Graduation_Date", graduationDate);
-                    cmd.Parameters.AddWithValue("@Enrollment_Date_Start", enrollmentDateStart);
-                    cmd.Parameters.AddWithValue("@Enrollment_Date_End", enrollmentDateEnd);
+                    // if date has no value, else
+                    if (graduationDate == default(DateTime))
+                    {
+                        cmd.Parameters.AddWithValue("@Graduation_Date", graduationDate).Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Graduation_Date", graduationDate);
+                    }
+                    if (enrollmentDateStart == default(DateTime))
+                    {
+                        cmd.Parameters.AddWithValue("@Enrollment_Date_Start", enrollmentDateStart).Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Enrollment_Date_Start", enrollmentDateStart);
+                    }
+                    if (enrollmentDateEnd == default(DateTime))
+                    {
+                        cmd.Parameters.AddWithValue("@Enrollment_Date_End", enrollmentDateEnd).Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Enrollment_Date_End", enrollmentDateEnd);
+                    }
+
                     cmd.Parameters.AddWithValue("@College_Term_Code", collegeTermCode);
                     cmd.Parameters.AddWithValue("@Updated_Date", updatedDate);
                     cmd.Parameters.AddWithValue("@Updated_By", updatedBy);
