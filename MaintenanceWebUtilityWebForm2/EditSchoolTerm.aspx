@@ -4,7 +4,7 @@
         
         Code</h1>
 
-    <asp:FormView ID="SHS_Term_Code_FormView" runat="server" AutoGenerateColumns="False" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTermDetails" ItemType="MaintenanceWebUtilityWebForm2.SHS_School_Term" >
+    <asp:FormView ID="SHS_Term_Code_FormView" runat="server" AutoGenerateColumns="False" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTermDetails" ItemType="MaintenanceWebUtilityWebForm2.SHS_School_Term" OnDataBound="FormView_OnDataBound" >
         <ItemTemplate>
             <table>
                 <tr>
@@ -18,11 +18,10 @@
                 <tr>
                     <td><asp:Label runat="server" Text="School_Term_Number"></asp:Label></td>
                     <td>
-                        <asp:SqlDataSource ID="SqlSelectSchool_Term_Number" runat="server" ConnectionString="<%$ ConnectionStrings:MaintenanceWebUtilityDbConnectionString %>" SelectCommand="SELECT DISTINCT [School_Term_Number] FROM [SHS_School_Term] ">
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="SHS_Term_Code_FormView" Name="School_Term_Number" PropertyName="SelectedValue" Type="Byte" />
-                            </SelectParameters>
-                        </asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlSelectSchool_Term_Number" runat="server" 
+                            ConnectionString="<%$ ConnectionStrings:MaintenanceWebUtilityDbConnectionString %>" 
+                            SelectCommand="uspGetSchoolTermNumberDropDown" 
+                            SelectCommandType="StoredProcedure" />
                         <asp:DropDownList  ID="School_Term_Number" SelectedValue="<%# Item.School_Term_Number %>"  DataSourceID="SqlSelectSchool_Term_Number" DataValueField="School_Term_Number" DataTextField="School_Term_Number" Width="240" runat="server" AutoPostBack="true"  CssClass="form-control valid" >
                         </asp:DropDownList>
                     </td>
@@ -49,7 +48,7 @@
                 </tr>
                 <tr>
                     <td><asp:Label runat="server" Text="Enrollment_Date_Start"></asp:Label></td>
-                    <td><asp:TextBox ID="Enrollment_Date_Start" type="datetime-local" Width="240" runat="server" value='<%#:Item.Graduation_Date.HasValue ? Item.Enrollment_Date_Start.Value.ToString("yyyy-MM-ddTHH:mm:ss") : null%>' CssClass="form-control valid" ></asp:TextBox></td>
+                    <td><asp:TextBox ID="Enrollment_Date_Start" type="datetime-local" Width="240" runat="server" value='<%#:Item.Enrollment_Date_Start.HasValue ? Item.Enrollment_Date_Start.Value.ToString("yyyy-MM-ddTHH:mm:ss") : null%>' CssClass="form-control valid" ></asp:TextBox></td>
                 </tr>
                 <tr>
                     <td><asp:Label runat="server" Text="Enrollment_Date_End"></asp:Label></td>
@@ -60,19 +59,19 @@
                     <td><asp:TextBox ID="College_Term_Code"  Width="240" runat="server" value='<%#:Item.College_Term_Code%>' CssClass="form-control valid" ></asp:TextBox></td>
                 </tr>
                 <tr>
-                    <td><asp:Label runat="server" Text="Updated_Date"></asp:Label></td>
-                    <td><asp:TextBox ID="Updated_Date" type="datetime-local" Width="240"  runat="server" value='<%#:Item.Updated_Date.ToString("yyyy-MM-ddTHH:mm:ss")%>' CssClass="form-control valid" ></asp:TextBox></td>
+                    <td><asp:Label ID="Updated_Date_Lbl" runat="server" Text="Updated_Date"></asp:Label></td>
+                    <td><asp:TextBox ID="Updated_Date" type="datetime-local" Width="240" runat="server" value='<%#:Item.Updated_Date.ToString("yyyy-MM-ddTHH:mm:ss")%>' CssClass="form-control valid" ></asp:TextBox></td>
                 </tr>
                 <tr>
-                    <td><asp:Label runat="server" Text="Updated_By"></asp:Label></td>
+                    <td><asp:Label ID="Updated_By_Lbl" runat="server" Text="Updated_By"></asp:Label></td>
                     <td><asp:TextBox ID="Updated_By"  Width="240" runat="server" value='<%#:Item.Updated_By%>' CssClass="form-control valid" ></asp:TextBox></td>
                 </tr>
                 <tr>
-                    <td><asp:Label runat="server" Text="Updated_Host"></asp:Label></td>
+                    <td><asp:Label ID="Updated_Host_Lbl" runat="server" Text="Updated_Host"></asp:Label></td>
                     <td><asp:TextBox ID="Updated_Host"  Width="240" runat="server" value='<%#:Item.Updated_Host%>' CssClass="form-control valid" ></asp:TextBox></td>
                 </tr>
                 <tr>
-                    <td><asp:Label runat="server" Text="Updated_App"></asp:Label></td>
+                    <td><asp:Label ID="Updated_App_Lbl" runat="server" Text="Updated_App"></asp:Label></td>
                     <td><asp:TextBox ID="Updated_App"  Width="240" runat="server" value='<%#:Item.Updated_App%>' CssClass="form-control valid" ></asp:TextBox></td>
                 </tr>
             </table>

@@ -27,14 +27,50 @@ namespace MaintenanceWebUtilityWebForm2
                             .Where(schoolTerm => schoolTerm.SHS_Term_Code == schoolTermCode);
             return query;
         }
-        
+
+        public void FormView_OnDataBound(object sender, EventArgs e)
+        {
+            //acquire userId from session
+            var userIdNullable = Session[SessionKey.UserId];
+            var userId = userIdNullable ?? default(int); // if not null
+
+            string constr = ConfigurationManager.ConnectionStrings["MaintenanceWebUtilityDbEntitiesDataSource"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("uspGetEmployeeTypeId"))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Id", userId);
+                    cmd.Connection = con;
+                    con.Open();
+                    var userEmployeeType = cmd.ExecuteScalar();
+                    con.Close();
+
+                    // hide unnecessary fields
+                    // if user is admin
+                    if(!(userEmployeeType.ToString().Equals("1"))) 
+                    {
+                        FormView fv = (FormView)sender;
+                        fv.FindControl("Updated_Date").Visible = false;
+                        fv.FindControl("Updated_By").Visible = false;
+                        fv.FindControl("Updated_Host").Visible = false;
+                        fv.FindControl("Updated_App").Visible = false;
+                        fv.FindControl("Updated_Date_Lbl").Visible = false;
+                        fv.FindControl("Updated_By_Lbl").Visible = false;
+                        fv.FindControl("Updated_Host_Lbl").Visible = false;
+                        fv.FindControl("Updated_App_Lbl").Visible = false;
+                    }
+
+                }
+            }
+        }
 
         protected void UpdateBtn_Click(object sender, EventArgs e)
         {
-            updateSchoolTerm();
+            UpdateSchoolTerm();
         }
 
-        private void updateSchoolTerm()
+        private void UpdateSchoolTerm()
         {
             //acquire userId from session
             var userIdNullable = Session[SessionKey.UserId];
