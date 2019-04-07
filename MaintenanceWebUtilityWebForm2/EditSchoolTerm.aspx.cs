@@ -62,7 +62,7 @@ namespace MaintenanceWebUtilityWebForm2
             TextBox updatedAppTextBox = (TextBox)fv.FindControl("Updated_App");
 
             int schoolYear = Convert.ToInt32(schoolYearTextBox.Text);
-            int schoolTermNumber = Convert.ToInt32(schoolTermNumberTextBox.Text);
+            int schoolTermNumber = Convert.ToInt32(schoolTermNumberDropDown.SelectedValue);
             string description = descriptionTextBox.Text;
             DateTime dateStart = Convert.ToDateTime(dateStartTextBox.Text);
             DateTime dateEnd = Convert.ToDateTime(dateEndTextBox.Text);
