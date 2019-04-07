@@ -14,8 +14,9 @@ namespace MaintenanceWebUtilityWebForm2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
+
         public IQueryable<SHS_School_Term> GetSchoolTermDetails()
         {
             var schoolTermCode = Convert.ToInt32(Request.QueryString["SHSTermCode"]);
@@ -26,6 +27,7 @@ namespace MaintenanceWebUtilityWebForm2
                             .Where(schoolTerm => schoolTerm.SHS_Term_Code == schoolTermCode);
             return query;
         }
+        
 
         protected void UpdateBtn_Click(object sender, EventArgs e)
         {
@@ -45,7 +47,7 @@ namespace MaintenanceWebUtilityWebForm2
             // get values from form
             int SHSTermCode = Convert.ToInt32(fv.DataKey[0]);
             TextBox schoolYearTextBox = (TextBox)fv.FindControl("School_Year");
-            TextBox schoolTermNumberTextBox = (TextBox)fv.FindControl("School_Term_Number");
+            DropDownList schoolTermNumberDropDown = (DropDownList)fv.FindControl("School_Term_Number");
             TextBox descriptionTextBox = (TextBox)fv.FindControl("Description");
             TextBox dateStartTextBox = (TextBox)fv.FindControl("Date_Start");
             TextBox dateEndTextBox = (TextBox)fv.FindControl("Date_End");
@@ -60,7 +62,7 @@ namespace MaintenanceWebUtilityWebForm2
             TextBox updatedAppTextBox = (TextBox)fv.FindControl("Updated_App");
 
             int schoolYear = Convert.ToInt32(schoolYearTextBox.Text);
-            int schoolTermNumber = Convert.ToInt32(schoolTermNumberTextBox.Text);
+            int schoolTermNumber = Convert.ToInt32(schoolTermNumberDropDown.SelectedValue);
             string description = descriptionTextBox.Text;
             DateTime dateStart = Convert.ToDateTime(dateStartTextBox.Text);
             DateTime dateEnd = Convert.ToDateTime(dateEndTextBox.Text);

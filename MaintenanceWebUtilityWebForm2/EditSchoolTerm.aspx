@@ -1,7 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditSchoolTerm.aspx.cs" Inherits="MaintenanceWebUtilityWebForm2.EditSchoolTerm" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Edit SHS Term Code</h1>
-    <asp:FormView ID="SHS_Term_Code_FormView" runat="server" AutoGenerateColumns="False" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTermDetails" ItemType="MaintenanceWebUtilityWebForm2.SHS_School_Term">
+    <h1>Edit SHS Term 
+        
+        Code</h1>
+
+    <asp:FormView ID="SHS_Term_Code_FormView" runat="server" AutoGenerateColumns="False" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTermDetails" ItemType="MaintenanceWebUtilityWebForm2.SHS_School_Term" >
         <ItemTemplate>
             <table>
                 <tr>
@@ -14,7 +17,15 @@
                 </tr>
                 <tr>
                     <td><asp:Label runat="server" Text="School_Term_Number"></asp:Label></td>
-                    <td><asp:TextBox ID="School_Term_Number"  Width="240" runat="server" value='<%#:Item.School_Term_Number%>' CssClass="form-control valid" ></asp:TextBox></td>
+                    <td>
+                        <asp:SqlDataSource ID="SqlSelectSchool_Term_Number" runat="server" ConnectionString="<%$ ConnectionStrings:MaintenanceWebUtilityDbConnectionString %>" SelectCommand="SELECT DISTINCT [School_Term_Number] FROM [SHS_School_Term] ">
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="SHS_Term_Code_FormView" Name="School_Term_Number" PropertyName="SelectedValue" Type="Byte" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                        <asp:DropDownList  ID="School_Term_Number" SelectedValue="<%# Item.School_Term_Number %>"  DataSourceID="SqlSelectSchool_Term_Number" DataValueField="School_Term_Number" DataTextField="School_Term_Number" Width="240" runat="server" AutoPostBack="true"  CssClass="form-control valid" >
+                        </asp:DropDownList>
+                    </td>
                 </tr>
                 <tr>
                     <td><asp:Label runat="server" Text="Description"></asp:Label></td>
