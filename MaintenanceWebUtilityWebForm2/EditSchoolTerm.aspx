@@ -1,8 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditSchoolTerm.aspx.cs" Inherits="MaintenanceWebUtilityWebForm2.EditSchoolTerm" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Edit SHS Term Code</h1>
+    <h1>Edit SHS Term 
+        
+        Code</h1>
 
-    <asp:FormView ID="SHS_Term_Code_FormView" runat="server" AutoGenerateColumns="False" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTermDetails" ItemType="MaintenanceWebUtilityWebForm2.SHS_School_Term" OnDataBound="GetOthers">
+    <asp:FormView ID="SHS_Term_Code_FormView" runat="server" AutoGenerateColumns="False" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTermDetails" ItemType="MaintenanceWebUtilityWebForm2.SHS_School_Term" >
         <ItemTemplate>
             <table>
                 <tr>
@@ -16,7 +18,12 @@
                 <tr>
                     <td><asp:Label runat="server" Text="School_Term_Number"></asp:Label></td>
                     <td>
-                        <asp:DropDownList ID="School_Term_Number"  Width="240" runat="server" AutoPostBack="true"  CssClass="form-control valid" >
+                        <asp:SqlDataSource ID="SqlSelectSchool_termNUm" runat="server" ConnectionString="<%$ ConnectionStrings:MaintenanceWebUtilityDbConnectionString %>" SelectCommand="SELECT [School_Term_Number] FROM [SHS_School_Term] WHERE ([School_Term_Number] = @School_Term_Number)">
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="SHS_Term_Code_FormView" Name="School_Term_Number" PropertyName="SelectedValue" Type="Byte" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                        <asp:DropDownList ID="School_Term_Number" DataSourceID="SqlSelectSchool_termNUm" Width="240" runat="server" AutoPostBack="true"  CssClass="form-control valid" >
                             
                         </asp:DropDownList>
                     </td>
