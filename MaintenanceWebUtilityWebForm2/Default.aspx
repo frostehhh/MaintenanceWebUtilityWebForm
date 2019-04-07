@@ -13,7 +13,7 @@
         <asp:Literal runat="server" id="empAccessibleLiteral" />
     </div>
 
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTerm" CssClass="datatable">
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTerm" CssClass="datatable" OnRowDataBound="GridView_OnRowDataBound">
         <Columns>
             <asp:BoundField DataField="SHS_Term_Code" HeaderText="SHS_Term_Code" ReadOnly="True" SortExpression="SHS_Term_Code" />
             <asp:BoundField DataField="School_Year" HeaderText="School_Year" ReadOnly="True" SortExpression="School_Year" />

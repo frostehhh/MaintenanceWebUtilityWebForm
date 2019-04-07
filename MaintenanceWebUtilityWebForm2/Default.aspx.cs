@@ -22,8 +22,6 @@ namespace MaintenanceWebUtilityWebForm2
             }
             else
             {
-                //get empAccessibles
-                //make stored procedure for empAccessibles
                 string constr = ConfigurationManager.ConnectionStrings["MaintenanceWebUtilityDbEntitiesDataSource"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
@@ -132,9 +130,50 @@ namespace MaintenanceWebUtilityWebForm2
                             empAccessibleLiteral.Text = String.Concat(empAccessibleLiteral.Text, facilityLiteral);
                         }
                     }
+
+
                 }
             }
             #endregion
+        }
+
+        public void GridView_OnRowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            string constr = ConfigurationManager.ConnectionStrings["MaintenanceWebUtilityDbEntitiesDataSource"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("uspGetEmployeeTypeId"))
+                {
+                    //acquire userId from session
+                    var userIdNullable = Session[SessionKey.UserId];
+                    var userId = userIdNullable ?? default(int); // if not null
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Id", userId);
+                    cmd.Connection = con;
+                    con.Open();
+                    var userEmployeeType = cmd.ExecuteScalar();
+                    con.Close();
+
+                    //hide other columns
+                    if (!(userEmployeeType.ToString().Equals("1")))
+                    {
+                        int gridViewColCount = e.Row.Cells.Count;
+                        for (int i = 0; i < gridViewColCount; i++) 
+                        {
+                            //hide SHS_Term_Code, updated_fields
+                            if(e.Row.Cells[i].Text.Equals("SHS_Term_Code") || 
+                                e.Row.Cells[i].Text.Equals("Updated_Date") ||
+                                e.Row.Cells[i].Text.Equals("Updated_By") || 
+                                e.Row.Cells[i].Text.Equals("Updated_Host") ||
+                                e.Row.Cells[i].Text.Equals("Updated_App"))
+                            {
+                                GridView1.Columns[i].Visible = false;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public IQueryable<SHS_School_Term> GetSchoolTerm(object sender, EventArgs e)
