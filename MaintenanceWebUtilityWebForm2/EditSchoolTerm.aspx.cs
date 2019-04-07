@@ -89,7 +89,7 @@ namespace MaintenanceWebUtilityWebForm2
             TextBox descriptionTextBox = (TextBox)fv.FindControl("Description");
             TextBox dateStartTextBox = (TextBox)fv.FindControl("Date_Start");
             TextBox dateEndTextBox = (TextBox)fv.FindControl("Date_End");
-            TextBox isActiveTextBox = (TextBox)fv.FindControl("Is_Active");
+            RadioButtonList isActiveRbList = (RadioButtonList)fv.FindControl("Is_ActiveRadioBtn");
             TextBox graduationDateTextBox = (TextBox)fv.FindControl("Graduation_Date");
             TextBox enrollmentDateStartTextBox = (TextBox)fv.FindControl("Enrollment_Date_Start");
             TextBox enrollmentDateEndTextBox = (TextBox)fv.FindControl("Enrollment_Date_End");
@@ -104,7 +104,7 @@ namespace MaintenanceWebUtilityWebForm2
             string description = descriptionTextBox.Text;
             DateTime dateStart = Convert.ToDateTime(dateStartTextBox.Text);
             DateTime dateEnd = Convert.ToDateTime(dateEndTextBox.Text);
-            bool isActive = Convert.ToBoolean(isActiveTextBox.Text);
+            bool isActive = Convert.ToBoolean(isActiveRbList.SelectedValue);
             DateTime graduationDate = DateTime.TryParse(graduationDateTextBox.Text, out graduationDate) ? Convert.ToDateTime(graduationDateTextBox.Text) : default(DateTime);
             DateTime enrollmentDateStart = DateTime.TryParse(enrollmentDateStartTextBox.Text, out enrollmentDateStart) ? Convert.ToDateTime(enrollmentDateStartTextBox.Text) : default(DateTime);
             DateTime enrollmentDateEnd = DateTime.TryParse(enrollmentDateEndTextBox.Text, out enrollmentDateEnd) ? Convert.ToDateTime(enrollmentDateEndTextBox.Text) : default(DateTime);

@@ -14,7 +14,7 @@ namespace MaintenanceWebUtilityWebForm2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            #region uspGetEmpAccessibles then display in page
+            #region uspGetEmpAccessibles then display facilities in page
             Dictionary<int, bool> empAccessiblesDict = new Dictionary<int, bool>();
             if (Session[SessionKey.UserId] == null)
             {
@@ -139,6 +139,7 @@ namespace MaintenanceWebUtilityWebForm2
 
         public void GridView_OnRowDataBound(object sender, GridViewRowEventArgs e)
         {
+            //For users other than administrator, hide SHS_Term_Code, updated_fields
             string constr = ConfigurationManager.ConnectionStrings["MaintenanceWebUtilityDbEntitiesDataSource"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {

@@ -40,7 +40,11 @@
                 </tr>
                 <tr>
                     <td><asp:Label runat="server" Text="Is_Active"></asp:Label></td>
-                    <td><asp:TextBox ID="Is_Active"  Width="240" runat="server" value='<%#:Item.Is_Active%>' CssClass="form-control valid" ></asp:TextBox></td>
+                    <asp:SqlDataSource ID="SqlSelectIs_Active" runat="server" 
+                            ConnectionString="<%$ ConnectionStrings:MaintenanceWebUtilityDbConnectionString %>" 
+                            SelectCommand="uspGetIsActiveSelections" 
+                            SelectCommandType="StoredProcedure" />
+                    <td><asp:RadioButtonList ID ="Is_ActiveRadioBtn" runat="server" SelectedValue="<%#:Item.Is_Active%>" DataSourceID="SqlSelectIs_Active" DataValueField="Is_Active" DataTextField="Is_Active" CssClass="display:inline"></asp:RadioButtonList></td>
                 </tr>
                 <tr>
                     <td><asp:Label runat="server" Text="Graduation_Date"></asp:Label></td>
