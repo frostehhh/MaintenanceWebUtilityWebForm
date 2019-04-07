@@ -47,7 +47,7 @@ namespace MaintenanceWebUtilityWebForm2
             // get values from form
             int SHSTermCode = Convert.ToInt32(fv.DataKey[0]);
             TextBox schoolYearTextBox = (TextBox)fv.FindControl("School_Year");
-            TextBox schoolTermNumberTextBox = (TextBox)fv.FindControl("School_Term_Number");
+            DropDownList schoolTermNumberDropDown = (DropDownList)fv.FindControl("School_Term_Number");
             TextBox descriptionTextBox = (TextBox)fv.FindControl("Description");
             TextBox dateStartTextBox = (TextBox)fv.FindControl("Date_Start");
             TextBox dateEndTextBox = (TextBox)fv.FindControl("Date_End");

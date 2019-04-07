@@ -18,12 +18,12 @@
                 <tr>
                     <td><asp:Label runat="server" Text="School_Term_Number"></asp:Label></td>
                     <td>
-                        <asp:SqlDataSource ID="SqlSelectSchool_termNUm" runat="server" ConnectionString="<%$ ConnectionStrings:MaintenanceWebUtilityDbConnectionString %>" SelectCommand="SELECT DISTINCT [School_Term_Number] FROM [SHS_School_Term] ">
+                        <asp:SqlDataSource ID="SqlSelectSchool_Term_Number" runat="server" ConnectionString="<%$ ConnectionStrings:MaintenanceWebUtilityDbConnectionString %>" SelectCommand="SELECT DISTINCT [School_Term_Number] FROM [SHS_School_Term] ">
                             <SelectParameters>
                                 <asp:ControlParameter ControlID="SHS_Term_Code_FormView" Name="School_Term_Number" PropertyName="SelectedValue" Type="Byte" />
                             </SelectParameters>
                         </asp:SqlDataSource>
-                        <asp:DropDownList  ID="School_Term_Number" SelectedValue="<%# Item.School_Term_Number %>"  DataSourceID="SqlSelectSchool_termNUm" DataValueField="School_Term_Number" DataTextField="School_Term_Number" Width="240" runat="server" AutoPostBack="true"  CssClass="form-control valid" >
+                        <asp:DropDownList  ID="School_Term_Number" SelectedValue="<%# Item.School_Term_Number %>"  DataSourceID="SqlSelectSchool_Term_Number" DataValueField="School_Term_Number" DataTextField="School_Term_Number" Width="240" runat="server" AutoPostBack="true"  CssClass="form-control valid" >
                         </asp:DropDownList>
                     </td>
                 </tr>
