@@ -28,6 +28,49 @@ namespace MaintenanceWebUtilityWebForm2
             return query;
         }
 
+        public void FormView_OnDataBound(object sender, EventArgs e)
+        {
+            //acquire userId from session
+            var userIdNullable = Session[SessionKey.UserId];
+            var userId = userIdNullable ?? default(int); // if not null
+
+            string constr = ConfigurationManager.ConnectionStrings["MaintenanceWebUtilityDbEntitiesDataSource"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("uspGetEmployeeTypeId"))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Id", userId);
+                    cmd.Connection = con;
+                    con.Open();
+                    var userEmployeeType = cmd.ExecuteScalar();
+                    con.Close();
+
+                    // hide unnecessary fields
+                    // if user is admin
+                    if (!(userEmployeeType.ToString().Equals("1")))
+                    {
+
+                        FormView fv = (FormView)sender;
+                        fv.FindControl("Period_ID").Visible = false;
+                        fv.FindControl("SHS_Term_Code").Visible = false;
+                        fv.FindControl("Updated_Date").Visible = false;
+                        fv.FindControl("Updated_By").Visible = false;
+                        fv.FindControl("Updated_Host").Visible = false;
+                        fv.FindControl("Updated_App").Visible = false;
+
+                        fv.FindControl("Period_ID_Lbl").Visible = false;
+                        fv.FindControl("SHS_Term_Code_Lbl").Visible = false;
+                        fv.FindControl("Updated_Date_Lbl").Visible = false;
+                        fv.FindControl("Updated_By_Lbl").Visible = false;
+                        fv.FindControl("Updated_Host_Lbl").Visible = false;
+                        fv.FindControl("Updated_App_Lbl").Visible = false;
+                    }
+
+                }
+            }
+        }
+
         protected void UpdateBtn_Click(object sender, EventArgs e)
         {
             updateSchoolPeriod();
@@ -45,11 +88,11 @@ namespace MaintenanceWebUtilityWebForm2
 
             //get values from form
             int periodId = Convert.ToInt32(fv.DataKey[0]);
-            TextBox SHSTermCodeTextBox = (TextBox)fv.FindControl("SHS_Term_Code");
+            int SHSTermCode = Convert.ToInt32(fv.DataKey[1]);
             TextBox periodNumberTextBox = (TextBox)fv.FindControl("Period_Number");
             TextBox periodDescriptionTextBox = (TextBox)fv.FindControl("Period_Description");
             TextBox schoolDaysTextBox = (TextBox)fv.FindControl("School_Days");
-            TextBox isActiveTextBox = (TextBox)fv.FindControl("Is_Active");
+            RadioButtonList isActiveRbList = (RadioButtonList)fv.FindControl("Is_ActiveRadioBtn");
             TextBox encodingStartTextBox = (TextBox)fv.FindControl("Encoding_Start");
             TextBox encodingEndTextBox = (TextBox)fv.FindControl("Encoding_End");
             TextBox updatedDateTextBox = (TextBox)fv.FindControl("Updated_Date");
@@ -57,14 +100,21 @@ namespace MaintenanceWebUtilityWebForm2
             TextBox updatedHostTextBox = (TextBox)fv.FindControl("Updated_Host");
             TextBox updatedAppTextBox = (TextBox)fv.FindControl("Updated_App");
 
-            int SHSTermCode = Convert.ToInt32(SHSTermCodeTextBox.Text);
             int periodNumber = Convert.ToInt32(periodNumberTextBox.Text);
             string periodDescription = periodDescriptionTextBox.Text;
             float schoolDays = float.Parse(schoolDaysTextBox.Text);
-            bool isActive = Convert.ToBoolean(isActiveTextBox.Text);
+            bool isActive = Convert.ToBoolean(isActiveRbList.SelectedValue);
             DateTime encodingStart = Convert.ToDateTime(encodingStartTextBox.Text);
             DateTime encodingEnd = Convert.ToDateTime(encodingEndTextBox.Text);
-            DateTime updatedDate = Convert.ToDateTime(updatedDateTextBox.Text);
+            DateTime updatedDate;
+            if (updatedAppTextBox.Visible == true)
+            {
+                updatedDate = Convert.ToDateTime(updatedDateTextBox.Text);
+            }
+            else
+            {
+                updatedDate = default(DateTime);
+            }
             string updatedBy = updatedByTextBox.Text;
             string updatedHost = updatedHostTextBox.Text;
             string updatedApp = updatedAppTextBox.Text;
@@ -84,10 +134,38 @@ namespace MaintenanceWebUtilityWebForm2
                     cmd.Parameters.AddWithValue("@Is_Active", isActive);
                     cmd.Parameters.AddWithValue("@Encoding_Start", encodingStart);
                     cmd.Parameters.AddWithValue("@Encoding_End", encodingEnd);
-                    cmd.Parameters.AddWithValue("@Updated_Date", updatedDate);
-                    cmd.Parameters.AddWithValue("@Updated_By", updatedBy);
-                    cmd.Parameters.AddWithValue("@Updated_Host", updatedHost);
-                    cmd.Parameters.AddWithValue("@Updated_App", updatedApp);
+                    if (updatedDate == default(DateTime))
+                    {
+                        cmd.Parameters.AddWithValue("@Updated_Date", updatedDate).Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Updated_Date", updatedDate);
+                    }
+                    if (updatedBy.Equals(""))
+                    {
+                        cmd.Parameters.AddWithValue("Updated_By", updatedBy).Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("Updated_By", updatedBy);
+                    }
+                    if (updatedHost.Equals(""))
+                    {
+                        cmd.Parameters.AddWithValue("Updated_Host", updatedHost).Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("Updated_Host", updatedHost);
+                    }
+                    if (updatedApp.Equals(""))
+                    {
+                        cmd.Parameters.AddWithValue("Updated_App", updatedApp).Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("Updated_App", updatedApp);
+                    }
 
                     cmd.Connection = con;
                     con.Open();

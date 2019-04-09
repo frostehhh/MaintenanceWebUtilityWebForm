@@ -6,7 +6,7 @@
         <ItemTemplate>
             <table>
                 <tr>
-                    <td><asp:Label runat="server" Text="SHS_Term_Code"></asp:Label></td>
+                    <td><asp:Label ID="SHS_Term_Code_Lbl" runat="server" Text="SHS_Term_Code"></asp:Label></td>
                     <td><asp:TextBox ID="SHS_Term_Code"  Width="240" runat="server" ReadOnly="True" value='<%#:Item.SHS_Term_Code%>' CssClass="form-control valid" ></asp:TextBox></td>
                 </tr>
                 <tr>

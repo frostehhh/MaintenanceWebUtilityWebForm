@@ -52,11 +52,13 @@ namespace MaintenanceWebUtilityWebForm2
                     {
                     
                         FormView fv = (FormView)sender;
+                        fv.FindControl("SHS_Term_Code").Visible = false;
                         fv.FindControl("Updated_Date").Visible = false;
                         fv.FindControl("Updated_By").Visible = false;
                         fv.FindControl("Updated_Host").Visible = false;
                         fv.FindControl("Updated_App").Visible = false;
 
+                        fv.FindControl("SHS_Term_Code_Lbl").Visible = false;
                         fv.FindControl("Updated_Date_Lbl").Visible = false;
                         fv.FindControl("Updated_By_Lbl").Visible = false;
                         fv.FindControl("Updated_Host_Lbl").Visible = false;
