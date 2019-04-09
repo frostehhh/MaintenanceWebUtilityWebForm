@@ -13,7 +13,7 @@
         <asp:Literal runat="server" id="empAccessibleLiteral" />
     </div>
 
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTerm" CssClass="datatable" OnRowDataBound="GridView_OnRowDataBound">
+    <asp:GridView ID="SHS_Term_GridView" runat="server" AutoGenerateColumns="false" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTerm" CssClass="datatable" OnRowDataBound="SHS_Term_GridView_OnRowDataBound">
         <Columns>
             <asp:BoundField DataField="SHS_Term_Code" HeaderText="SHS_Term_Code" ReadOnly="True" SortExpression="SHS_Term_Code" />
             <asp:BoundField DataField="School_Year" HeaderText="School_Year" ReadOnly="True" SortExpression="School_Year" />
@@ -34,7 +34,7 @@
         </Columns>
     </asp:GridView>
 
-    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" DataKeyNames="Period_ID" SelectMethod="GetSchoolPeriod" CssClass="datatable">
+    <asp:GridView ID="School_Period_GridView" runat="server" AutoGenerateColumns="false" DataKeyNames="Period_ID" SelectMethod="GetSchoolPeriod" CssClass="datatable" OnRowDataBound="School_Period_GridView_OnRowDataBound">
         <Columns>
             <asp:BoundField DataField="Period_ID" HeaderText="Period_ID" ReadOnly="True" SortExpression="Period_ID" />
             <asp:BoundField DataField="SHS_Term_Code" HeaderText="SHS_Term_Code" ReadOnly="True" SortExpression="SHS_Term_Code" />

@@ -1,8 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditSchoolTerm.aspx.cs" Inherits="MaintenanceWebUtilityWebForm2.EditSchoolTerm" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Edit SHS Term 
-        
-        Code</h1>
+    <h1>Edit SHS Term Code</h1>
 
     <asp:FormView ID="SHS_Term_Code_FormView" runat="server" AutoGenerateColumns="False" DataKeyNames="SHS_Term_Code" SelectMethod="GetSchoolTermDetails" ItemType="MaintenanceWebUtilityWebForm2.SHS_School_Term" OnDataBound="FormView_OnDataBound" >
         <ItemTemplate>
