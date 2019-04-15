@@ -137,6 +137,11 @@ namespace MaintenanceWebUtilityWebForm2
             #endregion
         }
 
+        protected void CreateMaintenanceBtn_OnClick(object sender, EventArgs e)
+        {
+            // 
+        }
+
         public void SHS_Term_GridView_OnRowDataBound(object sender, GridViewRowEventArgs e)
         {
             //For users other than administrator, hide SHS_Term_Code, updated_fields
@@ -223,7 +228,6 @@ namespace MaintenanceWebUtilityWebForm2
             var query = _context.SHS_School_Term;
             return query;
         }
-
         public IQueryable<SHS_School_Period> GetSchoolPeriod(object sender, EventArgs e)
         {
             var _db = new MaintenanceWebUtilityDbEntities();

@@ -145,6 +145,7 @@
     <Content Include="Content\svg-with-js.min.css" />
     <Content Include="Content\v4-shims.css" />
     <Content Include="Content\v4-shims.min.css" />
+    <Content Include="CreateMaintenance.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="EditSchoolPeriod.aspx" />
     <Content Include="EditSchoolTerm.aspx" />
@@ -421,6 +422,13 @@
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateMaintenance.aspx.cs">
+      <DependentUpon>CreateMaintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateMaintenance.aspx.designer.cs">
+      <DependentUpon>CreateMaintenance.aspx</DependentUpon>
     </Compile>
     <Compile Include="C__RefactorLog.cs">
       <DependentUpon>MaintenanceWebUtilityModel.tt</DependentUpon>
