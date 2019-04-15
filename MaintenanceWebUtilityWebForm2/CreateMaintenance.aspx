@@ -17,36 +17,32 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                       
-                        <div class="row">
+                         <div class="row">
                             <div class="col-sm-12">
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" aria-sort="ascending" style="width: 134.009px;">Name</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 212.009px;">Position</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 95.0089px;">Office</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 41.0089px;">Age</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 92.0089px;">Start date</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 74px;">Salary</th>
+                                            <th tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" >PK</th>
+                                            <th tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" >Name</th>
+                                            <th tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" >Data Type</th>
+                                            <th tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" >Allow Nulls</th>
+                                            <th tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" >Default Value</th>
                                         </tr>
                                     </thead>
                                     <tbody>                   
                                         <tr role="row" class="odd">
-                                            <td class="sorting_1">Airi Satou</td>
-                                            <td class="">Accountant</td>
-                                            <td class="">Tokyo</td>
-                                            <td class="">33</td>
-                                            <td class="">2008/11/28</td>
-                                            <td class="">$162,700</td>
+                                            <td>Airi Satou</td>
+                                            <td>Accountant</td>
+                                            <td>Tokyo</td>
+                                            <td>33</td>
+                                            <td>2008/11/28</td>
                                         </tr>
                                         <tr role="row" class="even">
-                                            <td class="sorting_1">Angelica Ramos</td>
-                                            <td class="">Chief Executive Officer (CEO)</td>
-                                            <td class="">London</td>
-                                            <td class="">47</td>
-                                            <td class="">2009/10/09</td>
-                                            <td class="">$1,200,000</td>
+                                            <td>Airi Satou</td>
+                                            <td>Accountant</td>
+                                            <td>Tokyo</td>
+                                            <td>33</td>
+                                            <td>2008/11/28</td>
                                         </tr>
                                     </tbody>
                                 </table>
