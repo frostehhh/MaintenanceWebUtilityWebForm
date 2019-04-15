@@ -1,6 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditSchoolPeriod.aspx.cs" Inherits="MaintenanceWebUtilityWebForm2.EditSchoolPeriod" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Edit SHS School Period</h1>
+    
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Edit SHS School Period</li>
+    </ol>
 
     <asp:FormView ID="SHS_School_Period_FormView" runat="server" AutoGenerateColumns="False" DataKeyNames="Period_ID, SHS_Term_Code" SelectMethod="GetSchoolPeriodDetails" ItemType="MaintenanceWebUtilityWebForm2.SHS_School_Period" OnDataBound="FormView_OnDataBound">
         <ItemTemplate>
