@@ -12,7 +12,7 @@ namespace MaintenanceWebUtilityWebForm2.Facilities
 {
     public partial class Edit : System.Web.UI.Page
     {
-        DateTime tempDateTime;
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {

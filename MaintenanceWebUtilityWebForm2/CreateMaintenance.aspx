@@ -16,44 +16,41 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                         <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
-                                    <thead>
-                                        <tr role="row">
-                                            <th tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" >PK</th>
-                                            <th tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" >Name</th>
-                                            <th tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" >Data Type</th>
-                                            <th tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" >Allow Nulls</th>
-                                            <th tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" >Default Value</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>                   
-                                        <tr role="row" class="odd">
-                                            <td>Airi Satou</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>33</td>
-                                            <td>2008/11/28</td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td>Airi Satou</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>33</td>
-                                            <td>2008/11/28</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>                 
-                    </div>
+                    <table id="" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>PK</th>
+                                <th>Name</th>
+                                <th>Data Type</th>
+                                <th>Allow Nulls</th>
+                                <th>Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><label>PK</label></td>
+                                <td><asp:TextBox ID="Name_Row_0" runat="server" /></td>
+                                <td>
+                                    <asp:DropDownList ID="DataType_Row_0" runat="server">
+                                        <asp:ListItem Text="varchar(50)" Value="varchar(50)" />
+                                        <asp:ListItem Text="nvarchar(50)" Value="nvarchar(50)" />
+                                    </asp:DropDownList>
+                                </td>
+                                <td><asp:CheckBox ID="AllowNulls_Row_0" runat="server" /></td>
+                                <td><asp:TextBox ID="Default_Row_0" runat="server" /></td>
+                            </tr>
+                            <asp:PlaceHolder ID="PlaceHolder1" runat="server" ClientIDMode="Static" />
+                        </tbody>
+                    </table>    
+                    <asp:Button runat="server" class="btn btn-light" ID="AddRowBtn" Text="Add Row" OnClick="AddRowBtn_OnClick"/>
+                    <asp:Button runat="server" class="btn btn-light" ID="CreateMaintenanceBtn" Text="Create"/>    
                 </div>
             </div>
         </div>
 
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
     </div>
+    
+
 
 </asp:Content>
