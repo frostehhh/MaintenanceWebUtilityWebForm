@@ -32,20 +32,16 @@ namespace MaintenanceWebUtilityWebForm2
             {
                 RecreateTableRows();
             }
-
         }
 
         public void AddRowBtn_OnClick(object sender, EventArgs e)
         {
             InsertTableRow();
         }
-
-        
         public void CreateBtn_OnClick(object sender, EventArgs e)
         {
            CreateSqlMaintenance();
         }
-
         private void CreateSqlMaintenance()
         {
             ArrayList existingControlIDArrayList = new ArrayList();
@@ -178,7 +174,6 @@ namespace MaintenanceWebUtilityWebForm2
                 }
             }
         }
-                    
         private void RecreateTableRows()
         {
             string literal;
@@ -296,9 +291,38 @@ namespace MaintenanceWebUtilityWebForm2
             return new List<string>()
             {
                 "bigint",
+                "binary(50)",
+                "bit",
+                "char(10)",
+                "date",
+                "datetime",
+                "datetime2(7)",
+                "datetimeoffset(7)",
+                "decimal(18,0)",
+                "float",
+                "image",
                 "int",
+                "money",
+                "nchar(10)",
+                "ntext",
+                "numeric(18,0)",
+                "nvarchar(50)",
+                "nvarchar(MAX)",
+                "real",
+                "rowversion",
+                "smalldatetime",
+                "smallint",
+                "smallmoney",
+                "sql_variant",
+                "text",
+                "time(7)",
+                "timestamp",
+                "tinyint",
+                "uniqueidentifier",
+                "varbinary(50)",
+                "varbinary(MAX)",
                 "varchar(50)",
-                "bit"
+                "xml"
             };
         }
         public DropDownList AddSqlDataTypesToDropDownList(DropDownList ddl)
