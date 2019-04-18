@@ -13,6 +13,15 @@ namespace MaintenanceWebUtilityWebForm2 {
     public partial class CreateMaintenance {
         
         /// <summary>
+        /// MaintenanceName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox MaintenanceName;
+        
+        /// <summary>
         /// Name_Row_0 control.
         /// </summary>
         /// <remarks>

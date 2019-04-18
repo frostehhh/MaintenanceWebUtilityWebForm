@@ -15,6 +15,13 @@
                 Create New Maintenance
             </div>
             <div class="card-body">
+                <div class="form-group row">
+
+                        <label for="MaintenanceName" class="col-sm-2">Maintenance Table Name</label>
+                        <div class="col-sm-3">
+                            <asp:TextBox ID="MaintenanceName" runat="server" CssClass="form-control" />
+                        </div>
+                </div>
                 <div class="table-responsive">
                     <table id="" class="table table-bordered">
                         <thead>
@@ -29,7 +36,7 @@
                         <tbody>
                             <tr>
                                 <td><label>PK</label></td>
-                                <td><asp:TextBox ID="Name_Row_0" runat="server" /></td>
+                                <td><asp:TextBox ID="Name_Row_0" runat="server" CssClass="form-control" /></td>
                                 <td>
                                     <asp:DropDownList ID="DataType_Row_0" runat="server">
                                         <asp:ListItem Text="varchar(50)" Value="varchar(50)" />
@@ -37,13 +44,13 @@
                                     </asp:DropDownList>
                                 </td>
                                 <td><asp:CheckBox ID="AllowNulls_Row_0" runat="server" /></td>
-                                <td><asp:TextBox ID="Default_Row_0" runat="server" /></td>
+                                <td><asp:TextBox ID="Default_Row_0" runat="server" CssClass="form-control" /></td>
                             </tr>
                             <asp:PlaceHolder ID="PlaceHolder1" runat="server" ClientIDMode="Static" />
                         </tbody>
                     </table>    
                     <asp:Button runat="server" class="btn btn-light" ID="AddRowBtn" Text="Add Row" OnClick="AddRowBtn_OnClick"/>
-                    <asp:Button runat="server" class="btn btn-light" ID="CreateMaintenanceBtn" Text="Create"/>    
+                    <asp:Button runat="server" class="btn btn-light" ID="CreateMaintenanceBtn" Text="Create" OnClick="CreateBtn_OnClick"/>    
                 </div>
             </div>
         </div>
