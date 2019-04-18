@@ -22,40 +22,40 @@ namespace MaintenanceWebUtilityWebForm2 {
         protected global::System.Web.UI.WebControls.TextBox MaintenanceName;
         
         /// <summary>
-        /// Name_Row_0 control.
+        /// Name_Row_PK control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Name_Row_0;
+        protected global::System.Web.UI.WebControls.TextBox Name_Row_PK;
         
         /// <summary>
-        /// DataType_Row_0 control.
+        /// DataType_Row_PK control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DataType_Row_0;
+        protected global::System.Web.UI.WebControls.DropDownList DataType_Row_PK;
         
         /// <summary>
-        /// AllowNulls_Row_0 control.
+        /// AllowNulls_Row_PK control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox AllowNulls_Row_0;
+        protected global::System.Web.UI.WebControls.CheckBox AllowNulls_Row_PK;
         
         /// <summary>
-        /// Default_Row_0 control.
+        /// Default_Row_PK control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Default_Row_0;
+        protected global::System.Web.UI.WebControls.TextBox Default_Row_PK;
         
         /// <summary>
         /// PlaceHolder1 control.

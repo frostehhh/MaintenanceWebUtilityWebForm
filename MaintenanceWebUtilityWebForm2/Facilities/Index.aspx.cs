@@ -16,7 +16,7 @@ namespace MaintenanceWebUtilityWebForm2.Facilities
         {
             /*
             var facilityId = Convert.ToInt32(Request.QueryString["facilityId"]);
-
+            
             string constr = ConfigurationManager.ConnectionStrings["MaintenanceWebUtilityDbEntitiesDataSource"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {

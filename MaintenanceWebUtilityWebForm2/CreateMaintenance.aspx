@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CreateMaintenance.aspx.cs" Inherits="MaintenanceWebUtilityWebForm2.CreateMaintenance" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" MaintainScrollPositionOnPostback="true" AutoEventWireup="true" CodeBehind="CreateMaintenance.aspx.cs" Inherits="MaintenanceWebUtilityWebForm2.CreateMaintenance" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -36,15 +36,13 @@
                         <tbody>
                             <tr>
                                 <td><label>PK</label></td>
-                                <td><asp:TextBox ID="Name_Row_0" runat="server" CssClass="form-control" /></td>
+                                <td><asp:TextBox ID="Name_Row_PK" runat="server" CssClass="form-control" /></td>
                                 <td>
-                                    <asp:DropDownList ID="DataType_Row_0" runat="server">
-                                        <asp:ListItem Text="varchar(50)" Value="varchar(50)" />
-                                        <asp:ListItem Text="nvarchar(50)" Value="nvarchar(50)" />
+                                    <asp:DropDownList ID="DataType_Row_PK" runat="server">
                                     </asp:DropDownList>
                                 </td>
-                                <td><asp:CheckBox ID="AllowNulls_Row_0" runat="server" /></td>
-                                <td><asp:TextBox ID="Default_Row_0" runat="server" CssClass="form-control" /></td>
+                                <td><asp:CheckBox ID="AllowNulls_Row_PK" runat="server" /></td>
+                                <td><asp:TextBox ID="Default_Row_PK" runat="server" CssClass="form-control" /></td>
                             </tr>
                             <asp:PlaceHolder ID="PlaceHolder1" runat="server" ClientIDMode="Static" />
                         </tbody>
