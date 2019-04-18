@@ -120,27 +120,28 @@ namespace MaintenanceWebUtilityWebForm2
                         if (string.IsNullOrWhiteSpace(defaultVal))
                         {
                             defaultVal = "";
+                            columnEntry = name + " " + datatype + " " + allowNull + " " + defaultVal;
+                            sqlCreateQueryEntryList.Add(columnEntry);
                         }
                         else
                         {
                             if (datatype.Contains("nonemuna"))
                             {
-
+                                columnEntry = name + " " + datatype + " " + allowNull + " " + defaultVal;
+                                sqlCreateQueryEntryList.Add(columnEntry);
                             }
                             else
                             {
                                 defaultVal = "DEFAULT " + defaultVal;
+                                columnEntry = name + " " + datatype + " " + allowNull + " " + defaultVal;
+                                sqlCreateQueryEntryList.Add(columnEntry);
                             }
                         }
                         //if not empty, add default
                     }
-                    i++;
-                    if(i%3 == 0)
-                    {
-                        columnEntry = name + " " + datatype + " " + allowNull + " " + defaultVal;
-                        sqlCreateQueryEntryList.Add(columnEntry);
-                        i = 0;
-                    }
+
+                        
+                    
                     
                 }
 
