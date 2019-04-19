@@ -38,8 +38,13 @@
                                 <td><label>PK</label></td>
                                 <td><asp:TextBox ID="Name_Row_PK" runat="server" CssClass="form-control" /></td>
                                 <td>
-                                    <asp:DropDownList ID="DataType_Row_PK" runat="server">
-                                    </asp:DropDownList>
+                                    <div class="container">
+                                        <div class="row">
+                                            <asp:DropDownList ID="DataType_Row_PK" runat="server" CssClass="form-control col-sm-9" AutoPostBack="true" OnSelectedIndexChanged="DataType_Row_OnSelectedIndexChanged"/>
+                                            <asp:TextBox ID="DataTypeNum_Row_PK" runat="server" CssClass="form-control col-sm-2" Enabled="false" />
+                                        </div>
+                                    </div>
+                                    
                                 </td>
                                 <td><asp:CheckBox ID="AllowNulls_Row_PK" runat="server" /></td>
                                 <td><asp:TextBox ID="Default_Row_PK" runat="server" CssClass="form-control" /></td>

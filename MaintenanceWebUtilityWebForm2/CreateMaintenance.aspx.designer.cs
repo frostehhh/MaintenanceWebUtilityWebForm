@@ -40,6 +40,15 @@ namespace MaintenanceWebUtilityWebForm2 {
         protected global::System.Web.UI.WebControls.DropDownList DataType_Row_PK;
         
         /// <summary>
+        /// DataTypeNum_Row_PK control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DataTypeNum_Row_PK;
+        
+        /// <summary>
         /// AllowNulls_Row_PK control.
         /// </summary>
         /// <remarks>

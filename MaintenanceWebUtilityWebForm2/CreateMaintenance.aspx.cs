@@ -34,6 +34,42 @@ namespace MaintenanceWebUtilityWebForm2
             }
         }
 
+        public void DataType_Row_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList ddl = (DropDownList)sender;
+            string ID = ddl.ID.Substring(ddl.ID.Length - 2);
+            TextBox tb = (TextBox)PlaceHolder1.FindControl("DataTypeNum_Row_" + ID);
+
+            //values wherein () is required 
+            if (ddl.SelectedValue.Contains("binary") || //50, 10, 7, 7, (18,0), 10, (18,0), 50, 7, 50 ,50
+                ddl.SelectedValue.Contains("char") ||
+                ddl.SelectedValue.Contains("datetime2") ||
+                ddl.SelectedValue.Contains("datetimeoffset") ||
+                ddl.SelectedValue.Contains("char") ||
+                ddl.SelectedValue.Contains("decimal") ||
+                ddl.SelectedValue.Contains("numeric") ||
+                ddl.SelectedValue.Contains("varbinary") ||
+                ddl.SelectedValue.Contains("time") &&
+                ddl.SelectedValue != "datetime"
+                )
+            {
+                tb.Enabled=true;
+                if (ddl.SelectedValue.Contains("binary")) { tb.Attributes.Add("placeholder", "(50)"); }
+                else if (ddl.SelectedValue.Contains("char")) { tb.Attributes.Add("placeholder", "(10)"); }
+                else if (ddl.SelectedValue.Contains("datetime2")) { tb.Attributes.Add("placeholder", "(7)"); }
+                else if (ddl.SelectedValue.Contains("datetimeoffset")) { tb.Attributes.Add("placeholder", "(7)"); }
+                else if (ddl.SelectedValue.Contains("decimal")) { tb.Attributes.Add("placeholder", "(18, 0)"); }
+                else if (ddl.SelectedValue.Contains("numeric")) { tb.Attributes.Add("placeholder", "(18,0)"); }
+                else if (ddl.SelectedValue.Contains("time")) { tb.Attributes.Add("placeholder", "(7)"); }
+                else if (ddl.SelectedValue.Contains("varbinary")) { tb.Attributes.Add("placeholder", "(50)"); }
+                //set default () for each datatype
+            }
+            else
+            {
+                tb.Enabled = false;
+            }
+        }
+
         public void AddRowBtn_OnClick(object sender, EventArgs e)
         {
             InsertTableRow();
