@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -48,6 +49,10 @@ namespace MaintenanceWebUtilityWebForm2
         public void CreateBtn_OnClick(object sender, EventArgs e)
         {
            CreateSqlMaintenance();
+        }
+        public void TestCreatePages_OnClick(object sender, EventArgs e)
+        {
+            CreatePagesFromTable();
         }
 
         private List<string> GetSqlDataTypes()
@@ -336,9 +341,42 @@ namespace MaintenanceWebUtilityWebForm2
         {
             ArrayList existingControlIDArrayList = new ArrayList();
             bool controlsArrayExists = false;
-
+            bool isInputComplete = true;
+            bool doesTableExist = false;
             //run if there are dynamically added rows
             //if ViewState.Keys contains controlIDArrayList
+
+            #region validate maintenancename
+            if (string.IsNullOrWhiteSpace(MaintenanceName.Text) && !MaintenanceName.CssClass.Contains("invalid"))
+            {
+                MaintenanceName.CssClass = MaintenanceName.CssClass + " is-invalid";
+            }
+            else if(string.IsNullOrWhiteSpace(MaintenanceName.Text) && MaintenanceName.CssClass.Contains("invalid"))
+            {
+                
+            }
+            else
+            {
+                MaintenanceName.CssClass = MaintenanceName.CssClass.Remove(MaintenanceName.CssClass.Length - " is-invalid".Length);
+            }
+
+            //check if table exists
+            //Logic.SQLUtil SQLUtility = new Logic.SQLUtil();
+            //doesTableExist = SQLUtility.CheckIfTableExists(MaintenanceName.Text);
+
+            //if (doesTableExist && !MaintenanceName.CssClass.Contains("invalid"))
+            //{
+            //    MaintenanceName.CssClass = MaintenanceName.CssClass + " is-invalid";
+            //return;
+            //}
+            //else
+            //{
+            //    MaintenanceName.CssClass = MaintenanceName.CssClass.Remove(MaintenanceName.CssClass.Length - " is-invalid".Length);
+            //      return;
+            //}
+            //
+            #endregion
+
             foreach (string str in ViewState.Keys)
             {
                 if (str == "controlIDArrayList")
@@ -346,10 +384,13 @@ namespace MaintenanceWebUtilityWebForm2
                     controlsArrayExists = true;
                     break;
                 }
+                else
+                {
+                    // Minimum
+                }
             }
-
             //construct sql create table string
-            if (controlsArrayExists)
+            if (!doesTableExist)
             {
                 string sqlCreateQueryStart = "CREATE TABLE [dbo].[" + MaintenanceName.Text + "](";
                 string sqlCreateQueryContent = "";
@@ -363,6 +404,15 @@ namespace MaintenanceWebUtilityWebForm2
                 //get pk row
                 //read PK row,
                 name = Name_Row_PK.Text;
+                if (string.IsNullOrWhiteSpace(name) && !Name_Row_PK.CssClass.Contains("invalid"))
+                {
+                    Name_Row_PK.CssClass = Name_Row_PK.CssClass + " is-invalid";
+                    isInputComplete = false;
+                }
+                else if (!string.IsNullOrWhiteSpace(name) && Name_Row_PK.CssClass.Contains("invalid"))
+                {
+                    Name_Row_PK.CssClass = Name_Row_PK.CssClass.Remove(Name_Row_PK.CssClass.Length - " is-invalid".Length);
+                }
                 datatype = DataType_Row_PK.SelectedValue;
                 allowNull = AllowNulls_Row_PK.Checked ? "NULL" : "NOT NULL";
                 defaultVal = Default_Row_PK.Text;
@@ -374,62 +424,74 @@ namespace MaintenanceWebUtilityWebForm2
                 {
                     defaultVal = "DEFAULT " + defaultVal;
                 }
+
                 columnEntry = name + " " + datatype + datatypeNum + " " + allowNull + " PRIMARY KEY " + defaultVal;
                 sqlCreateQueryEntryList.Add(columnEntry);
 
-                //get dynamically created rows
-                //construct each columnEntryString
-                int i = 0;
-                foreach (string str in existingControlIDArrayList)
+                //get dynamically created rows and concatenate sql create string
+                if(controlsArrayExists)
                 {
-                    if (str.StartsWith("Name_Row_"))
+                    foreach (string str in existingControlIDArrayList)
                     {
-                        name = ((TextBox)PlaceHolder1.FindControl(str)).Text;
-                    }
-                    else if (str.StartsWith("DataType_Row_"))
-                    {
-                        datatype = ((DropDownList)PlaceHolder1.FindControl(str)).SelectedValue;
-                    }
-                    else if (str.StartsWith("DataTypeNum_Row_"))
-                    {
-                        tb = (TextBox)PlaceHolder1.FindControl(str);
-                        if (tb.Enabled)
+                        if (str.StartsWith("Name_Row_"))
                         {
-                            if (string.IsNullOrWhiteSpace(tb.Text))
+                            tb = (TextBox)PlaceHolder1.FindControl(str);
+                            name = tb.Text;
+                            if (string.IsNullOrWhiteSpace(name) && !tb.CssClass.Contains("invalid"))
                             {
-                                //consider default value
-                                datatypeNum = GetDefaultParameterValueSqlDataType(datatype);
+                                tb.CssClass = tb.CssClass + " is-invalid";
+                                isInputComplete = false;
+                            }
+                            else if (!string.IsNullOrWhiteSpace(name) && tb.CssClass.Contains("invalid"))
+                            {
+                                tb.CssClass = tb.CssClass.Remove(tb.CssClass.Length - " is-invalid".Length);
+                            }
+                        }
+                        else if (str.StartsWith("DataType_Row_"))
+                        {
+                            datatype = ((DropDownList)PlaceHolder1.FindControl(str)).SelectedValue;
+                        }
+                        else if (str.StartsWith("DataTypeNum_Row_"))
+                        {
+                            tb = (TextBox)PlaceHolder1.FindControl(str);
+                            if (tb.Enabled)
+                            {
+                                if (string.IsNullOrWhiteSpace(tb.Text))
+                                {
+                                    //consider default value
+                                    datatypeNum = GetDefaultParameterValueSqlDataType(datatype);
+                                }
+                                else
+                                {
+                                    datatypeNum = tb.Text;
+                                }
                             }
                             else
                             {
-                                datatypeNum = tb.Text;
+                                datatypeNum = "";
                             }
                         }
-                        else
+                        else if (str.StartsWith("AllowNulls_Row_"))
                         {
-                            datatypeNum = "";
+                            allowNull = ((CheckBox)PlaceHolder1.FindControl(str)).Checked ? "NULL" : "NOT NULL";
                         }
-                    }
-                    else if (str.StartsWith("AllowNulls_Row_"))
-                    {
-                        allowNull = ((CheckBox)PlaceHolder1.FindControl(str)).Checked ? "NULL" : "NOT NULL";
-                    }
-                    else if (str.StartsWith("Default_Row_"))
-                    {
-                        defaultVal = ((TextBox)PlaceHolder1.FindControl(str)).Text;
-                        if (string.IsNullOrWhiteSpace(defaultVal))
+                        else if (str.StartsWith("Default_Row_"))
                         {
-                            defaultVal = "";
-                            columnEntry = name + " " + datatype + datatypeNum + " " + allowNull + " " + defaultVal;
-                            sqlCreateQueryEntryList.Add(columnEntry);
+                            defaultVal = ((TextBox)PlaceHolder1.FindControl(str)).Text;
+                            if (string.IsNullOrWhiteSpace(defaultVal))
+                            {
+                                defaultVal = "";
+                                columnEntry = name + " " + datatype + datatypeNum + " " + allowNull + " " + defaultVal;
+                                sqlCreateQueryEntryList.Add(columnEntry);
+                            }
+                            else
+                            {
+                                defaultVal = "DEFAULT " + defaultVal;
+                                columnEntry = name + " " + datatype + datatypeNum + " " + allowNull + " " + defaultVal;
+                                sqlCreateQueryEntryList.Add(columnEntry);
+                            }
+                            //if not empty, add default
                         }
-                        else
-                        {
-                            defaultVal = "DEFAULT " + defaultVal;
-                            columnEntry = name + " " + datatype + datatypeNum + " " + allowNull + " " + defaultVal;
-                            sqlCreateQueryEntryList.Add(columnEntry);
-                        }
-                        //if not empty, add default
                     }
                 }
 
@@ -443,25 +505,38 @@ namespace MaintenanceWebUtilityWebForm2
                 sqlCreateQueryFinal = sqlCreateQueryStart + sqlCreateQueryContent + sqlCreateQueryEnd;
 
                 //send createquery to sql server
-                string constr = ConfigurationManager.ConnectionStrings["MaintenanceWebUtilityDbEntitiesDataSource"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(constr))
+                if (isInputComplete)
                 {
-
-                    using (SqlCommand cmd = new SqlCommand(sqlCreateQueryFinal))
+                    string constr = ConfigurationManager.ConnectionStrings["MaintenanceWebUtilityDbEntitiesDataSource"].ConnectionString;
+                    using (SqlConnection con = new SqlConnection(constr))
                     {
-                        cmd.Connection = con;
-                        con.Open();
-                        try
+
+                        using (SqlCommand cmd = new SqlCommand(sqlCreateQueryFinal))
                         {
-                            cmd.ExecuteNonQuery();
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine("e: " + e);
+                            cmd.Connection = con;
+                            con.Open();
+                            try
+                            {
+                                cmd.ExecuteNonQuery();
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine("e: " + e);
+                            }
                         }
                     }
+                    //here write streamwriter to create new 
                 }
             }
+            
+        }
+        private void CreatePagesFromTable()
+        {
+            using (StreamWriter sw = new StreamWriter(Server.MapPath("fileName.aspx")))
+            {
+                sw.WriteLine("gay");
+            }
+
         }
     }
 }
