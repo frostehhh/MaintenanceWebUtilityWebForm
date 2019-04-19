@@ -44,9 +44,8 @@
                                             <asp:TextBox ID="DataTypeNum_Row_PK" runat="server" CssClass="form-control col-sm-2" Enabled="false" />
                                         </div>
                                     </div>
-                                    
                                 </td>
-                                <td><asp:CheckBox ID="AllowNulls_Row_PK" runat="server" /></td>
+                                <td><asp:CheckBox ID="AllowNulls_Row_PK" Enabled="false" runat="server" /></td>
                                 <td><asp:TextBox ID="Default_Row_PK" runat="server" CssClass="form-control" /></td>
                             </tr>
                             <asp:PlaceHolder ID="PlaceHolder1" runat="server" ClientIDMode="Static" />
