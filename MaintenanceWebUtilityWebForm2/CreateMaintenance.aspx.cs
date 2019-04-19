@@ -81,14 +81,7 @@ namespace MaintenanceWebUtilityWebForm2
                 }
                 else
                 {
-                    if (datatype.Contains("nonemuna"))
-                    {
-
-                    }
-                    else
-                    {
-                        defaultVal = "DEFAULT " + defaultVal;
-                    }
+                    defaultVal = "DEFAULT " + defaultVal;
                 }
                 columnEntry = name + " " + datatype + " " + allowNull + " PRIMARY KEY " + defaultVal;
                 sqlCreateQueryEntryList.Add(columnEntry);
@@ -121,17 +114,9 @@ namespace MaintenanceWebUtilityWebForm2
                         }
                         else
                         {
-                            if (datatype.Contains("nonemuna"))
-                            {
-                                columnEntry = name + " " + datatype + " " + allowNull + " " + defaultVal;
-                                sqlCreateQueryEntryList.Add(columnEntry);
-                            }
-                            else
-                            {
-                                defaultVal = "DEFAULT " + defaultVal;
-                                columnEntry = name + " " + datatype + " " + allowNull + " " + defaultVal;
-                                sqlCreateQueryEntryList.Add(columnEntry);
-                            }
+                            defaultVal = "DEFAULT " + defaultVal;
+                            columnEntry = name + " " + datatype + " " + allowNull + " " + defaultVal;
+                            sqlCreateQueryEntryList.Add(columnEntry);
                         }
                         //if not empty, add default
                     }
