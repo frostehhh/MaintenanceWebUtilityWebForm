@@ -52,7 +52,7 @@ namespace MaintenanceWebUtilityWebForm2
         }
         public void TestCreatePages_OnClick(object sender, EventArgs e)
         {
-            CreatePagesFromTable();
+            CreatePagesFromTable("testing");
         }
 
         private List<string> GetSqlDataTypes()
@@ -530,9 +530,10 @@ namespace MaintenanceWebUtilityWebForm2
             }
             
         }
-        private void CreatePagesFromTable()
+        private void CreatePagesFromTable(string tableName)
         {
-            using (StreamWriter sw = new StreamWriter(Server.MapPath("fileName.aspx")))
+            
+            using (StreamWriter sw = new StreamWriter(Server.MapPath("~/" + tableName + "/Index.aspx")))
             {
                 sw.WriteLine("gay");
             }
