@@ -146,6 +146,7 @@
     <Content Include="Content\v4-shims.css" />
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="CreateMaintenance.aspx" />
+    <Content Include="Default - Copy.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="EditSchoolPeriod.aspx" />
     <Content Include="EditSchoolTerm.aspx" />
@@ -432,6 +433,13 @@
     </Compile>
     <Compile Include="C__RefactorLog.cs">
       <DependentUpon>MaintenanceWebUtilityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Default - Copy.aspx.cs">
+      <DependentUpon>Default - Copy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default - Copy.aspx.designer.cs">
+      <DependentUpon>Default - Copy.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

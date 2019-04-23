@@ -359,7 +359,10 @@ namespace MaintenanceWebUtilityWebForm2
             {
                 MaintenanceName.CssClass = MaintenanceName.CssClass.Remove(MaintenanceName.CssClass.Length - " is-invalid".Length);
             }
+            #endregion
 
+
+            #region check if table exists for data validation
             //check if table exists
             //Logic.SQLUtil SQLUtility = new Logic.SQLUtil();
             //doesTableExist = SQLUtility.CheckIfTableExists(MaintenanceName.Text);
@@ -532,7 +535,13 @@ namespace MaintenanceWebUtilityWebForm2
         }
         private void CreatePagesFromTable(string tableName)
         {
-            
+            string folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, tableName);
+
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
             using (StreamWriter sw = new StreamWriter(Server.MapPath("~/" + tableName + "/Index.aspx")))
             {
                 sw.WriteLine("gay");

@@ -25,9 +25,7 @@ namespace MaintenanceWebUtilityWebForm2.Logic
                     object i = cmd.ExecuteScalar();
                     return (cmd.ExecuteScalar().ToString() == "1") ? true : false;
                 }
-                
             }
-            return false;
         }
     }
 }
