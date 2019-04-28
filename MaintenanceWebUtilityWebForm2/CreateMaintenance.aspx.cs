@@ -512,11 +512,9 @@ namespace MaintenanceWebUtilityWebForm2
                     string constr = ConfigurationManager.ConnectionStrings["MaintenanceWebUtilityDbEntitiesDataSource"].ConnectionString;
                     using (SqlConnection con = new SqlConnection(constr))
                     {
-
-                        using (SqlCommand cmd = new SqlCommand(sqlCreateQueryFinal))
+                        con.Open();
+                        using (SqlCommand cmd = new SqlCommand(sqlCreateQueryFinal, con))
                         {
-                            cmd.Connection = con;
-                            con.Open();
                             try
                             {
                                 cmd.ExecuteNonQuery();
@@ -526,8 +524,16 @@ namespace MaintenanceWebUtilityWebForm2
                                 Console.WriteLine("e: " + e);
                             }
                         }
+
+                        using (SqlCommand cmd = new SqlCommand("uspInsertMaintenanceTable", con))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@TableName", MaintenanceName.Text);
+                            cmd.ExecuteNonQuery();
+                        }
+
                     }
-                    //here write streamwriter to create new 
+                    
                 }
             }
             
