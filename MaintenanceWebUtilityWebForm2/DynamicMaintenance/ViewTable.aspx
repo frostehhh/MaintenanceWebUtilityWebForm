@@ -15,7 +15,9 @@
             <asp:GridView runat="server" ID="ViewTable_GridView" CssClass="table table-bordered dataTable" 
                 AutoGenerateEditButton="true" ShowHeaderWhenEmpty="true" 
                 OnRowEditing="ViewTable_GridView_OnRowEditing"
-                OnRowCancelingEdit="ViewTable_GridView_OnRowCancelingEdit">
+                OnRowCancelingEdit="ViewTable_GridView_OnRowCancelingEdit"
+                OnRowUpdating="ViewTable_GridView_OnRowUpdating"
+                >
             </asp:GridView>
         </div>
     </div>

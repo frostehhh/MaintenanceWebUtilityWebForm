@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -18,7 +19,11 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             tableName = Session["MaintenanceTableName"].ToString();
             tableNameLiteral.Text = tableName;
             ViewState["MaintenanceTableName"] = tableName;
-            GetData();
+            
+            if (!IsPostBack)
+            {
+                GetData();
+            }
         }
         private void GetData()
         {
@@ -44,19 +49,100 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             // bind the data now    
             ViewTable_GridView.DataBind();
         }
-        protected void AssignCssPerRow(object sender, EventArgs e)
+        protected void ViewTable_GridView_OnRowEditing(object sender, GridViewEditEventArgs e)
         {
-
+            ViewTable_GridView.EditIndex = e.NewEditIndex;
+            GetData();
         }
-
-        protected void ViewTable_GridView_OnRowEditing(object sender, EventArgs e)
-        {
-
-        }
-
         protected void ViewTable_GridView_OnRowCancelingEdit(object sender, EventArgs e)
         {
+            ViewTable_GridView.EditIndex = -1;
+            GetData();
+        }
+        private ArrayList GetHeaderRowValues(GridView gv)
+        {
+            GridViewRow row = gv.HeaderRow;
+            ArrayList values = new ArrayList();
 
+            for (int i = 1; i < row.Cells.Count; i++)
+            {
+                values.Add(row.Cells[i].Text);
+            }
+            return values;
+        }
+        private ArrayList GetDataTypes(GridView gv)
+        {
+            ArrayList values = new ArrayList();
+            string constr = ConfigurationManager.ConnectionStrings["MaintenanceWebUtilityDbEntitiesDataSource"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                con.Open();
+                string sql = $"SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH FROM information_schema.columns WHERE TABLE_NAME = '{tableName}'";
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    var data = cmd.ExecuteReader();
+                    if (data.HasRows)
+                    {
+                        while (data.Read())
+                        {
+                            values.Add(new ArrayList() { data.GetString(0), data.GetString(1), data.GetString(2) });
+                        }
+                    }
+                }
+            }
+            return values;
+            
+        }
+
+        protected void ViewTable_GridView_OnRowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            GridViewRow row = ViewTable_GridView.Rows[e.RowIndex];
+            ArrayList dataHeader = new ArrayList();
+            ArrayList dataValues = new ArrayList();
+            ArrayList dataTypes = new ArrayList();
+            Control control = new Control();
+            var controlType = typeof(Type);
+
+            //populate dataValues, dataTypes, and dataHeaders
+            dataTypes = GetDataTypes(ViewTable_GridView);
+            dataHeader = GetHeaderRowValues(ViewTable_GridView);
+            for (int i=1; i< row.Cells.Count; i++)
+            {
+                control = row.Cells[i].Controls[0];
+                controlType = control.GetType();
+                if(controlType.Name == "TextBox")
+                {
+                    dataValues.Add(((TextBox)control).Text);
+                }
+                else if(controlType.Name == "CheckBox")
+                {
+                    dataValues.Add(((CheckBox)control).Checked);
+                }
+            }
+
+            ViewTable_GridView.EditIndex = -1;
+
+            string constr = ConfigurationManager.ConnectionStrings["MaintenanceWebUtilityDbEntitiesDataSource"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                con.Open();
+                string sql = $"UPDATE {ViewState["MaintenanceTableName"]} SET ";
+                //loop through dataheader, datavalues and datatypes per iteration
+                for(int i=0; i<dataHeader.Count; i++)
+                {
+
+                }
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            //conn.Open();
+            //SqlCommand cmd = new SqlCommand("update detail set name='" + textName.Text + "',address='" + textadd.Text + "',country='" + textc.Text + "'where id='" + userid + "'", conn);
+            //cmd.ExecuteNonQuery();
+            //conn.Close();
+            GetData();
         }
     }
 }
