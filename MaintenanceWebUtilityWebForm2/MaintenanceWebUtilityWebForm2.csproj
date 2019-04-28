@@ -147,6 +147,7 @@
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="CreateMaintenance.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="Dynamic.aspx" />
     <Content Include="EditSchoolPeriod.aspx" />
     <Content Include="EditSchoolTerm.aspx" />
     <Content Include="Facilities\Edit.aspx" />
@@ -439,6 +440,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dynamic.aspx.cs">
+      <DependentUpon>Dynamic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dynamic.aspx.designer.cs">
+      <DependentUpon>Dynamic.aspx</DependentUpon>
     </Compile>
     <Compile Include="EditSchoolPeriod.aspx.cs">
       <DependentUpon>EditSchoolPeriod.aspx</DependentUpon>

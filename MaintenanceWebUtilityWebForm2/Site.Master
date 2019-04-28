@@ -144,6 +144,13 @@
                         <span>Tables</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Dynamic Maintenance
+                        </span>
+                    </a>
+                </li>
             </ul>
             <div id="content-wrapper">
 
