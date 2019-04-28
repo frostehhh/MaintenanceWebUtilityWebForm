@@ -38,10 +38,46 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
                 pl.Controls.Add(label);
                 pl.Controls.Add(new LiteralControl("</td><td>"));
 
+                //if textbox, date, or checkbox
                 string idText = (i < 10) ? "0" + i.ToString() : i.ToString();
-                TextBox tb = new TextBox() { ID = "columnName_TextBox_" + idText,
-                                                CssClass = "form-control valid" };
-                pl.Controls.Add(tb);
+                if (datatype == "date")
+                {
+                    TextBox tb = new TextBox()
+                    {
+                        ID = "columnName_Input_" + idText,
+                        CssClass = "form-control valid"
+                    };
+                    tb.Attributes.Add("Type", "date");
+                    pl.Controls.Add(tb);
+                }
+                else if (datatype == "datetime")
+                {
+                    TextBox tb = new TextBox()
+                    {
+                        ID = "columnName_Input_" + idText,
+                        CssClass = "form-control valid"
+                    };
+                    tb.Attributes.Add("Type", "datetime-local");
+                    pl.Controls.Add(tb);
+                }
+                else if(datatype == "bit")
+                {
+                    CheckBox cb = new CheckBox()
+                    {
+                        ID = "columnName_Input_" + idText
+                    };
+                    pl.Controls.Add(cb);
+                }
+                else
+                {
+                    TextBox tb = new TextBox()
+                    {
+                        ID = "columnName_Input_" + idText,
+                        CssClass = "form-control valid"
+                    };
+                    pl.Controls.Add(tb);
+                }
+               
                 pl.Controls.Add(new LiteralControl("</td></tr>"));
             }
             pl.Controls.Add(new LiteralControl("</table>"));
