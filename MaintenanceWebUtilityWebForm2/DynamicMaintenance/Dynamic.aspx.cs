@@ -15,6 +15,11 @@ namespace MaintenanceWebUtilityWebForm2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            GetPlaceHolderData();
+        }
+
+        private void GetPlaceHolderData()
+        {
             string constr = ConfigurationManager.ConnectionStrings["MaintenanceWebUtilityDbEntitiesDataSource"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
@@ -36,7 +41,7 @@ namespace MaintenanceWebUtilityWebForm2
                     }
                 }
 
-                
+
 
                 string literal, stringIdx;
                 int i = 0;
@@ -57,7 +62,7 @@ namespace MaintenanceWebUtilityWebForm2
 
                     LinkButton tableLinkBtn = new LinkButton();
                     stringIdx = i.ToString();
-                    if(i < 10)
+                    if (i < 10)
                     {
                         stringIdx = "0" + stringIdx;
                     }

@@ -20,5 +20,6 @@
                 >
             </asp:GridView>
         </div>
+        <asp:Button ID="InsertRow_Btn" runat="server" />
     </div>
 </asp:Content>
