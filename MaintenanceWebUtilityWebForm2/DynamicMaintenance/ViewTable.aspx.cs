@@ -13,19 +13,17 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
 {
     public partial class ViewTable : System.Web.UI.Page
     {
-        string tableName = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                tableName = Session["MaintenanceTableName"].ToString();
-                tableNameLiteral.Text = tableName;
-                ViewState["MaintenanceTableName"] = tableName;
+                tableNameLiteral.Text = Session["MaintenanceTableName"].ToString();
+                ViewState["MaintenanceTableName"] = Session["MaintenanceTableName"].ToString();
                 GetData();
             }
         }
         
-        protected void InsertRow_LinkBtn_OnClick(object sender, GridViewEditEventArgs e)
+        protected void InsertRow_LinkBtn_OnClick(object sender, EventArgs e)
         {
             Session["MaintenanceTableName"] = ViewState["MaintenanceTableName"];
             Response.Redirect("Create");
@@ -150,7 +148,6 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
                 }
             }
             return values;
-            
         }
         private bool CheckIfSqlNumType(string s)
         {
