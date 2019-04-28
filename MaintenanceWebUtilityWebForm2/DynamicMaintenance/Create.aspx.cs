@@ -24,7 +24,7 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
         protected void CreatePlaceHolderContents()
         {
             ArrayList tableColumnsSchema = GetTableColumnsSchema();
-            PlaceHolder pl = (PlaceHolder)EditRow_FormView.FindControl("EditRow_PlaceHolder");
+            PlaceHolder pl = EditRow_PlaceHolder;
 
             pl.Controls.Add(new LiteralControl("<table>"));
             for(int i = 0; i<tableColumnsSchema.Count; i++)
