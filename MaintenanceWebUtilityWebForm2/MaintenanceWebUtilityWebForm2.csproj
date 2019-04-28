@@ -149,7 +149,6 @@
     <Content Include="Default.aspx" />
     <Content Include="DynamicMaintenance\Create.aspx" />
     <Content Include="DynamicMaintenance\Dynamic.aspx" />
-    <Content Include="DynamicMaintenance\Edit.aspx" />
     <Content Include="DynamicMaintenance\ViewTable.aspx" />
     <Content Include="EditSchoolPeriod.aspx" />
     <Content Include="EditSchoolTerm.aspx" />
@@ -457,13 +456,6 @@
     </Compile>
     <Compile Include="DynamicMaintenance\Dynamic.aspx.designer.cs">
       <DependentUpon>Dynamic.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicMaintenance\Edit.aspx.cs">
-      <DependentUpon>Edit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DynamicMaintenance\Edit.aspx.designer.cs">
-      <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
     <Compile Include="DynamicMaintenance\ViewTable.aspx.cs">
       <DependentUpon>ViewTable.aspx</DependentUpon>
