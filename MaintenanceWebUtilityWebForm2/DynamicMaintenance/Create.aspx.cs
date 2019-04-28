@@ -11,6 +11,8 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            ViewState["MaintenanceTableName"] = Session["MaintenanceTableName"];
+
 
         }
     }
