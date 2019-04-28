@@ -25,6 +25,11 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             }
         }
         
+        protected void InsertRow_LinkBtn_OnClick(object sender, GridViewEditEventArgs e)
+        {
+            Session["MaintenanceTableName"] = ViewState["MaintenanceTableName"];
+            Response.Redirect("Create");
+        }
         protected void ViewTable_GridView_OnRowEditing(object sender, GridViewEditEventArgs e)
         {
             ViewTable_GridView.EditIndex = e.NewEditIndex;
@@ -226,6 +231,6 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             
         }
 
-
+        
     }
 }

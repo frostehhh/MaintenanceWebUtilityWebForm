@@ -31,12 +31,12 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance {
         protected global::System.Web.UI.WebControls.GridView ViewTable_GridView;
         
         /// <summary>
-        /// InsertRow_Btn control.
+        /// InsertRow_LinkBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button InsertRow_Btn;
+        protected global::System.Web.UI.WebControls.LinkButton InsertRow_LinkBtn;
     }
 }
