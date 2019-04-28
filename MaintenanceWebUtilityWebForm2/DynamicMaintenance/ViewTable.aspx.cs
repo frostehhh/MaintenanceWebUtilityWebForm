@@ -41,5 +41,9 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             // bind the data now    
             ViewTable_GridView.DataBind();
         }
+        protected void AssignCssPerRow(object sender, EventArgs e)
+        {
+
+        }
     }
 }
