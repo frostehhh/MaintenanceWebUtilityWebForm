@@ -76,21 +76,33 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             string constr = ConfigurationManager.ConnectionStrings["MaintenanceWebUtilityDbEntitiesDataSource"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                con.Open();
-                string sql = $"SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH FROM information_schema.columns WHERE TABLE_NAME = '{tableName}'";
+                string sql = $"SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH FROM information_schema.columns WHERE TABLE_NAME = @TableName";
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
+                    cmd.Parameters.Add("@TableName", SqlDbType.VarChar).Value = ViewState["MaintenanceTableName"];
+                    con.Open();
                     var data = cmd.ExecuteReader();
-                    if (data.HasRows)
+                    while (data.Read())
                     {
-                        while (data.Read())
-                        {
-                            values.Add(new ArrayList() { data.GetString(0), data.GetString(1), data.GetString(2) });
-                        }
+                        values.Add(new ArrayList() { data["COLUMN_NAME"].ToString(), data["DATA_TYPE"].ToString(), data["CHARACTER_MAXIMUM_LENGTH"].ToString() });
                     }
                 }
             }
             return values;
+            
+        }
+
+        private bool CheckIfSqlNumType(string s)
+        {
+            s = s.ToLower();
+            if(s.Equals("bigint") || s.Equals("int") || s.Equals("tinyint") || s.Equals("smallint"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
             
         }
 
@@ -127,11 +139,34 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             {
                 con.Open();
                 string sql = $"UPDATE {ViewState["MaintenanceTableName"]} SET ";
+                bool isNumType;
                 //loop through dataheader, datavalues and datatypes per iteration
-                for(int i=0; i<dataHeader.Count; i++)
+                for(int i=1; i<dataHeader.Count; i++)
                 {
-
+                    sql += dataHeader[i] + "=";
+                    isNumType = CheckIfSqlNumType(dataTypes[i].ToString());
+                    if(isNumType)
+                    {
+                        sql += dataValues[i] + ", ";
+                    }
+                    else
+                    {
+                        sql += "'" + dataValues[i] + "', ";
+                    }
                 }
+                sql = sql.Substring(0, sql.Length - 2);
+
+                sql += " WHERE " + dataHeader[0] + "=";
+                isNumType = CheckIfSqlNumType(dataTypes[0].ToString());
+                if (isNumType)
+                {
+                    sql += dataValues[0];
+                }
+                else
+                {
+                    sql += "'" + dataValues[0] + "'";
+                }
+
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
                     cmd.ExecuteNonQuery();
