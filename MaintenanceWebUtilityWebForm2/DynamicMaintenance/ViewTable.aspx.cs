@@ -211,10 +211,17 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
                     //Item.EncodingEndDate.Value.ToString("yyyy-MM-ddTHH:mm:ss")
                     //DateTime encodingStartDate = DateTime.TryParse(encodingStartDateTextBox.Text, out encodingStartDate) ? Convert.ToDateTime(encodingStartDateTextBox.Text) : default(DateTime);
                     DateTime date;
+                    (row.Cells[i + 1].Controls[0] as TextBox).Text = DateTime.TryParse((row.Cells[i + 1].Controls[0] as TextBox).Text, out date) ? date.ToString("yyyy-MM-dd") : default(DateTime).ToString();
+                    (row.Cells[i + 1].Controls[0] as TextBox).Attributes.Add("Type", "date");
+                }
+                else if((dataTypes[i] as ArrayList)[1].ToString() == "datetime")
+                {
+                    DateTime date;
                     (row.Cells[i + 1].Controls[0] as TextBox).Text = DateTime.TryParse((row.Cells[i + 1].Controls[0] as TextBox).Text, out date) ? date.ToString("yyyy-MM-ddTHH:mm:ss") : default(DateTime).ToString();
                     (row.Cells[i + 1].Controls[0] as TextBox).Attributes.Add("Type", "datetime-local");
                 }
-                    
+
+
             }
             
         }
