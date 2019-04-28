@@ -187,7 +187,16 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
         {
             for (int i = 1; i < row.Cells.Count; i++)
             {
-                (row.Cells[i].Controls[0] as TextBox).CssClass = "form-control";
+                var controlType = row.Cells[i].Controls[0].GetType();
+                if (controlType.Name == "TextBox")
+                {
+                    (row.Cells[i].Controls[0] as TextBox).CssClass = "form-control";
+                }
+                else if (controlType.Name == "CheckBox")
+                {
+                    
+                }
+                
             }
         }
 
