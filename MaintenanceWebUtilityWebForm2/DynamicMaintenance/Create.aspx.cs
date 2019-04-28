@@ -26,8 +26,9 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             ArrayList tableColumnsSchema = GetTableColumnsSchema();
             PlaceHolder pl = EditRow_PlaceHolder;
 
+            //PK or first column will not be rendered.
             pl.Controls.Add(new LiteralControl("<table>"));
-            for(int i = 0; i<tableColumnsSchema.Count; i++)
+            for(int i = 1; i<tableColumnsSchema.Count; i++)
             {
                 ArrayList col = (ArrayList)tableColumnsSchema[i];
                 string colName = col[0].ToString();
