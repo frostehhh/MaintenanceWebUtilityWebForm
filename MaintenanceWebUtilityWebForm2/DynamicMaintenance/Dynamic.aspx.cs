@@ -63,6 +63,7 @@ namespace MaintenanceWebUtilityWebForm2
                     }
                     tableLinkBtn.ID = "tableLinkBtn_" + stringIdx;
                     tableLinkBtn.Text = table;
+                    tableLinkBtn.CssClass = "text-white";
                     tableLinkBtn.CommandName = table;
                     tableLinkBtn.Click += new EventHandler(tableLinkBtn_OnClick);
                     MaintenanceNavPlaceHolder.Controls.Add(tableLinkBtn);
@@ -160,6 +161,8 @@ namespace MaintenanceWebUtilityWebForm2
 
         public void tableLinkBtn_OnClick(object sender, EventArgs e)
         {//https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.webcontrols.button.commandname?view=netframework-4.8
+            ViewState["MaintenanceTableName"] = ((Button)sender).CommandName;
+            //move to dynamic index page
         }
     }
 }
