@@ -35,6 +35,7 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             (row.Cells[1].Controls[0] as TextBox).Enabled = false;
 
             SetEditRowCssClass(row);
+            SetEditRowDateInputType(row);
         }
         protected void ViewTable_GridView_OnRowCancelingEdit(object sender, EventArgs e)
         {
@@ -51,7 +52,7 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             var controlType = typeof(Type);
 
             //populate dataValues, dataTypes, and dataHeaders
-            dataTypes = GetDataTypes(ViewTable_GridView);
+            dataTypes = GetDataTypes();
             dataHeader = GetHeaderRowValues(ViewTable_GridView);
             for (int i = 1; i < row.Cells.Count; i++)
             {
@@ -125,7 +126,7 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             }
             return values;
         }
-        private ArrayList GetDataTypes(GridView gv)
+        private ArrayList GetDataTypes()
         {
             ArrayList values = new ArrayList();
             string constr = ConfigurationManager.ConnectionStrings["MaintenanceWebUtilityDbEntitiesDataSource"].ConnectionString;
@@ -198,6 +199,24 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
                 }
                 
             }
+        }
+        private void SetEditRowDateInputType(TableRow row)
+        {
+            ArrayList dataTypes = GetDataTypes();
+            
+            for (int i = 0; i < dataTypes.Count; i++)
+            {
+                if((dataTypes[i] as ArrayList)[1].ToString() == "date")
+                {
+                    //Item.EncodingEndDate.Value.ToString("yyyy-MM-ddTHH:mm:ss")
+                    //DateTime encodingStartDate = DateTime.TryParse(encodingStartDateTextBox.Text, out encodingStartDate) ? Convert.ToDateTime(encodingStartDateTextBox.Text) : default(DateTime);
+                    DateTime date;
+                    (row.Cells[i + 1].Controls[0] as TextBox).Text = DateTime.TryParse((row.Cells[i + 1].Controls[0] as TextBox).Text, out date) ? date.ToString("yyyy-MM-ddTHH:mm:ss") : default(DateTime).ToString();
+                    (row.Cells[i + 1].Controls[0] as TextBox).Attributes.Add("Type", "datetime-local");
+                }
+                    
+            }
+            
         }
 
 
