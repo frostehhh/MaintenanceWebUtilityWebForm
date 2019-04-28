@@ -39,7 +39,7 @@ namespace MaintenanceWebUtilityWebForm2
         {
             DropDownList ddl = (DropDownList)sender;
             string ID = ddl.ID.Substring(ddl.ID.Length - 2);
-            TextBox tb = (TextBox)PlaceHolder1.FindControl("DataTypeNum_Row_" + ID);
+            TextBox tb = (TextBox)TableDataPlaceHolder.FindControl("DataTypeNum_Row_" + ID);
             CheckDataType(ddl,tb);
         }
         public void AddRowBtn_OnClick(object sender, EventArgs e)
@@ -188,15 +188,15 @@ namespace MaintenanceWebUtilityWebForm2
                             controlIdStr = controlId.ToString();
                         }
                         literal = "<tr><td></td><td>";
-                        PlaceHolder1.Controls.Add(new LiteralControl(literal));
+                        TableDataPlaceHolder.Controls.Add(new LiteralControl(literal));
 
                         tb = new TextBox() { ID = "Name_Row_" + controlIdStr };
                         tb.CssClass = "form-control";
-                        PlaceHolder1.Controls.Add(tb);
+                        TableDataPlaceHolder.Controls.Add(tb);
                         controlIDArrayList.Add(tb.ID.ToString());
 
                         literal = "</td><td><div class='container'><div class='row'>";
-                        PlaceHolder1.Controls.Add(new LiteralControl(literal));
+                        TableDataPlaceHolder.Controls.Add(new LiteralControl(literal));
                     }
                     else if (str.StartsWith("DataType_Row_"))
                     {
@@ -216,17 +216,17 @@ namespace MaintenanceWebUtilityWebForm2
                         ddl.CssClass = "form-control col-sm-9";
                         ddl.AutoPostBack = true;
                         ddl.SelectedIndexChanged += DataType_Row_OnSelectedIndexChanged;
-                        PlaceHolder1.Controls.Add(ddl);
+                        TableDataPlaceHolder.Controls.Add(ddl);
                         controlIDArrayList.Add(ddl.ID.ToString());
 
                         tb = new TextBox() { ID = "DataTypeNum_Row_" + controlIdStr };
                         tb.CssClass = "form-control col-sm-2";
                         CheckDataType(ddl, tb);
-                        PlaceHolder1.Controls.Add(tb);
+                        TableDataPlaceHolder.Controls.Add(tb);
                         controlIDArrayList.Add(tb.ID.ToString());
 
                         literal = "</div></div></td><td>";
-                        PlaceHolder1.Controls.Add(new LiteralControl(literal));
+                        TableDataPlaceHolder.Controls.Add(new LiteralControl(literal));
                     }
                     else if (str.StartsWith("AllowNulls_Row_"))
                     {
@@ -240,11 +240,11 @@ namespace MaintenanceWebUtilityWebForm2
                             controlIdStr = controlId.ToString();
                         }
                         cb = new CheckBox() { ID = "AllowNulls_Row_" + controlIdStr };
-                        PlaceHolder1.Controls.Add(cb);
+                        TableDataPlaceHolder.Controls.Add(cb);
                         controlIDArrayList.Add(cb.ID.ToString());
 
                         literal = "</td><td>";
-                        PlaceHolder1.Controls.Add(new LiteralControl(literal));
+                        TableDataPlaceHolder.Controls.Add(new LiteralControl(literal));
                     }
                     else if (str.StartsWith("Default_Row_"))
                     {
@@ -259,11 +259,11 @@ namespace MaintenanceWebUtilityWebForm2
                         }
                         tb = new TextBox() { ID = "Default_Row_" + controlIdStr };
                         tb.CssClass = "form-control";
-                        PlaceHolder1.Controls.Add(tb);
+                        TableDataPlaceHolder.Controls.Add(tb);
                         controlIDArrayList.Add(tb.ID.ToString());
 
                         literal = "</td></tr>";
-                        PlaceHolder1.Controls.Add(new LiteralControl(literal));
+                        TableDataPlaceHolder.Controls.Add(new LiteralControl(literal));
                     }
                 }
             }
@@ -291,15 +291,15 @@ namespace MaintenanceWebUtilityWebForm2
                 controlIdStr = controlId.ToString();
             }
             literal = "<tr><td></td><td>";
-            PlaceHolder1.Controls.Add(new LiteralControl(literal));
+            TableDataPlaceHolder.Controls.Add(new LiteralControl(literal));
 
             tb = new TextBox() { ID = "Name_Row_" + controlIdStr };
             tb.CssClass = "form-control";
-            PlaceHolder1.Controls.Add(tb);
+            TableDataPlaceHolder.Controls.Add(tb);
             controlIDArrayList.Add(tb.ID.ToString());
 
             literal = "</td><td><div class='container'><div class='row'>";
-            PlaceHolder1.Controls.Add(new LiteralControl(literal));
+            TableDataPlaceHolder.Controls.Add(new LiteralControl(literal));
 
             ddl = new DropDownList();
             ddl = AddSqlDataTypesToDropDownList(ddl);
@@ -308,32 +308,32 @@ namespace MaintenanceWebUtilityWebForm2
             ddl.AutoPostBack = true;
             ddl.SelectedIndexChanged += DataType_Row_OnSelectedIndexChanged;
 
-            PlaceHolder1.Controls.Add(ddl);
+            TableDataPlaceHolder.Controls.Add(ddl);
             controlIDArrayList.Add(ddl.ID.ToString());
 
             tb = new TextBox() { ID = "DataTypeNum_Row_" + controlIdStr };
             tb.CssClass = "form-control col-sm-2";
             tb.Enabled = false;
-            PlaceHolder1.Controls.Add(tb);
+            TableDataPlaceHolder.Controls.Add(tb);
             controlIDArrayList.Add(tb.ID.ToString());
 
             literal = "</div></div></td><td>";
-            PlaceHolder1.Controls.Add(new LiteralControl(literal));
+            TableDataPlaceHolder.Controls.Add(new LiteralControl(literal));
 
             cb = new CheckBox() { ID = "AllowNulls_Row_" + controlIdStr };
-            PlaceHolder1.Controls.Add(cb);
+            TableDataPlaceHolder.Controls.Add(cb);
             controlIDArrayList.Add(cb.ID.ToString());
 
             literal = "</td><td>";
-            PlaceHolder1.Controls.Add(new LiteralControl(literal));
+            TableDataPlaceHolder.Controls.Add(new LiteralControl(literal));
 
             tb = new TextBox() { ID = "Default_Row_" + controlIdStr };
             tb.CssClass = "form-control";
-            PlaceHolder1.Controls.Add(tb);
+            TableDataPlaceHolder.Controls.Add(tb);
             controlIDArrayList.Add(tb.ID.ToString());
 
             literal = "</td></tr>";
-            PlaceHolder1.Controls.Add(new LiteralControl(literal));
+            TableDataPlaceHolder.Controls.Add(new LiteralControl(literal));
 
             ViewState["controlIDArrayList"] = controlIDArrayList;
         }
@@ -438,7 +438,7 @@ namespace MaintenanceWebUtilityWebForm2
                     {
                         if (str.StartsWith("Name_Row_"))
                         {
-                            tb = (TextBox)PlaceHolder1.FindControl(str);
+                            tb = (TextBox)TableDataPlaceHolder.FindControl(str);
                             name = tb.Text;
                             if (string.IsNullOrWhiteSpace(name) && !tb.CssClass.Contains("invalid"))
                             {
@@ -452,11 +452,11 @@ namespace MaintenanceWebUtilityWebForm2
                         }
                         else if (str.StartsWith("DataType_Row_"))
                         {
-                            datatype = ((DropDownList)PlaceHolder1.FindControl(str)).SelectedValue;
+                            datatype = ((DropDownList)TableDataPlaceHolder.FindControl(str)).SelectedValue;
                         }
                         else if (str.StartsWith("DataTypeNum_Row_"))
                         {
-                            tb = (TextBox)PlaceHolder1.FindControl(str);
+                            tb = (TextBox)TableDataPlaceHolder.FindControl(str);
                             if (tb.Enabled)
                             {
                                 if (string.IsNullOrWhiteSpace(tb.Text))
@@ -476,11 +476,11 @@ namespace MaintenanceWebUtilityWebForm2
                         }
                         else if (str.StartsWith("AllowNulls_Row_"))
                         {
-                            allowNull = ((CheckBox)PlaceHolder1.FindControl(str)).Checked ? "NULL" : "NOT NULL";
+                            allowNull = ((CheckBox)TableDataPlaceHolder.FindControl(str)).Checked ? "NULL" : "NOT NULL";
                         }
                         else if (str.StartsWith("Default_Row_"))
                         {
-                            defaultVal = ((TextBox)PlaceHolder1.FindControl(str)).Text;
+                            defaultVal = ((TextBox)TableDataPlaceHolder.FindControl(str)).Text;
                             if (string.IsNullOrWhiteSpace(defaultVal))
                             {
                                 defaultVal = "";

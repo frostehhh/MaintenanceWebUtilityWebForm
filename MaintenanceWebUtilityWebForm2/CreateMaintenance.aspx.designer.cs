@@ -67,13 +67,13 @@ namespace MaintenanceWebUtilityWebForm2 {
         protected global::System.Web.UI.WebControls.TextBox Default_Row_PK;
         
         /// <summary>
-        /// PlaceHolder1 control.
+        /// TableDataPlaceHolder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder1;
+        protected global::System.Web.UI.WebControls.PlaceHolder TableDataPlaceHolder;
         
         /// <summary>
         /// AddRowBtn control.

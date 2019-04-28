@@ -48,7 +48,7 @@
                                 <td><asp:CheckBox ID="AllowNulls_Row_PK" Enabled="false" runat="server" /></td>
                                 <td><asp:TextBox ID="Default_Row_PK" runat="server" CssClass="form-control" /></td>
                             </tr>
-                            <asp:PlaceHolder ID="PlaceHolder1" runat="server" ClientIDMode="Static" />
+                            <asp:PlaceHolder ID="TableDataPlaceHolder" runat="server" ClientIDMode="Static" />
                         </tbody>
                     </table>    
                     <asp:Button runat="server" class="btn btn-light" ID="AddRowBtn" Text="Add Row" OnClick="AddRowBtn_OnClick"/>
