@@ -13,6 +13,15 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance {
     public partial class ViewTable {
         
         /// <summary>
+        /// tableNameLiteral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal tableNameLiteral;
+        
+        /// <summary>
         /// ViewTable_GridView control.
         /// </summary>
         /// <remarks>

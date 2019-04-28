@@ -12,8 +12,12 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
 {
     public partial class ViewTable : System.Web.UI.Page
     {
+        string tableName = "";
         protected void Page_Load(object sender, EventArgs e)
         {
+            tableName = Session["MaintenanceTableName"].ToString();
+            tableNameLiteral.Text = tableName;
+            ViewState["MaintenanceTableName"] = tableName;
             GetData();
         }
         private void GetData()
@@ -23,7 +27,6 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             using (SqlConnection conn = new SqlConnection(constr))
             {
                 // write the sql statement to execute   
-                string tableName = Session["MaintenanceTableName"].ToString();
                 string sql = $"SELECT * FROM {tableName}";
                 // instantiate the command object to fire    
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
@@ -42,6 +45,16 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             ViewTable_GridView.DataBind();
         }
         protected void AssignCssPerRow(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ViewTable_GridView_OnRowEditing(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ViewTable_GridView_OnRowCancelingEdit(object sender, EventArgs e)
         {
 
         }
