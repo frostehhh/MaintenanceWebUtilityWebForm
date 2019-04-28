@@ -72,97 +72,13 @@ namespace MaintenanceWebUtilityWebForm2
                     MaintenanceNavPlaceHolder.Controls.Add(new LiteralControl(literal));
                     i++;
                 }
-                //LinkButton maintenanceNavLinkBtn = new LinkButton();
-                //maintenanceNavLinkBtn += new EventHandler(btnTest_Click);
-
-                #region template for maintenance nav
-                //if (empAccessiblesDict[1] == true)
-                //{
-                //    facilityLiteral = @" < div class=""col-xl-3 col-sm-6 mb-3"">
-                //                                    <div class=""card text-white bg-primary o-hidden h-100"">
-                //                                        <div class=""card-body"">
-                //                                            <div class=""card-body-icon"">
-                //                                                <i class=""fas fa-fw fa-comments""></i>
-                //                                            </div>
-                //                                            <div class=""mr -5"">IT</div>
-                //                                        </div>
-                //                                        <a class=""card-footer text-white clearfix small z-1"" href=""#"">
-                //                                            <span class=""float-left"">View Details</span>
-                //                                            <span class=""float-right"">
-                //                                                <i class=""fas fa-angle-right""></i>
-                //                                            </span>
-                //                                        </a>
-                //                                    </div>
-                //                                </div>";
-                //    empAccessibleLiteral.Text = String.Concat(empAccessibleLiteral.Text, facilityLiteral);
-                //}
-                //if (empAccessiblesDict[2] == true)
-                //{
-                //    facilityLiteral = @"<div class=""col-xl-3 col-sm-6 mb-3"">
-                //                                    <div class=""card text-white bg-warning o-hidden h-100"">
-                //                                        <div class=""card-body"">
-                //                                            <div class=""card-body-icon"">
-                //                                                <i class=""fas fa-fw fa-comments""></i>
-                //                                            </div>
-                //                                            <div class=""mr -5"">SHS</div>
-                //                                        </div>
-                //                                        <a class=""card-footer text-white clearfix small z-1"" runat=""server"" href=""./Facilities/Index.aspx?facilityId=2"">
-                //                                            <span class=""float-left"">View Details</span>
-                //                                            <span class=""float-right"">
-                //                                                <i class=""fas fa-angle-right""></i>
-                //                                            </span>
-                //                                        </a>
-                //                                    </div>
-                //                                </div>";
-                //    empAccessibleLiteral.Text = String.Concat(empAccessibleLiteral.Text, facilityLiteral);
-                //}
-                //if (empAccessiblesDict[3] == true)
-                //{
-                //    facilityLiteral = @"<div class=""col-xl-3 col-sm-6 mb-3"">
-                //                                    <div class=""card text-white bg-success o-hidden h-100"">
-                //                                        <div class=""card-body"">
-                //                                            <div class=""card-body-icon"">
-                //                                                <i class=""fas fa-fw fa-comments""></i>
-                //                                            </div>
-                //                                            <div class=""mr -5"">CS</div>
-                //                                        </div>
-                //                                        <a class=""card-footer text-white clearfix small z-1"" href =""#"">
-                //                                            <span class=""float-left"">View Details</span>
-                //                                            <span class=""float-right"">
-                //                                                <i class=""fas fa-angle-right""></i>
-                //                                            </span>
-                //                                        </a>
-                //                                    </div>
-                //                                </div>";
-                //    empAccessibleLiteral.Text = String.Concat(empAccessibleLiteral.Text, facilityLiteral);
-                //}
-                //if (empAccessiblesDict[4] == true)
-                //{
-                //    facilityLiteral = @"<div class=""col-xl-3 col-sm-6 mb-3"">
-                //                                    <div class=""card text-white bg-danger o-hidden h-100"">
-                //                                        <div class=""card-body"">
-                //                                            <div class=""card-body-icon"">
-                //                                                <i class=""fas fa-fw fa-comments""></i>
-                //                                            </div>
-                //                                            <div class=""mr -5"">PSY</div>
-                //                                        </div>
-                //                                        <a class=""card-footer text-white clearfix small z-1"" href =""#"">
-                //                                            <span class=""float-left"">View Details</span>
-                //                                            <span class=""float-right"">
-                //                                                <i class=""fas fa-angle-right""></i>
-                //                                            </span>
-                //                                        </a>
-                //                                    </div>
-                //                                </div>";
-                //    empAccessibleLiteral.Text = String.Concat(empAccessibleLiteral.Text, facilityLiteral);
-                #endregion
             }
         }
 
         public void tableLinkBtn_OnClick(object sender, EventArgs e)
         {//https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.webcontrols.button.commandname?view=netframework-4.8
-            ViewState["MaintenanceTableName"] = ((Button)sender).CommandName;
-            //move to dynamic index page
+            Session["MaintenanceTableName"] = ((LinkButton)sender).CommandName;
+            Response.Redirect("ViewTable");
         }
     }
 }
