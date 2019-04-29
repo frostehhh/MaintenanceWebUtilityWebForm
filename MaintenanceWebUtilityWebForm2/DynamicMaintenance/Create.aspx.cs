@@ -8,18 +8,21 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Diagnostics;
 
 namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
 {
     public partial class Create : System.Web.UI.Page
     {
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            ViewState["MaintenanceTableName"] = Session["MaintenanceTableName"].ToString();
+            CreatePlaceHolderContents();
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                ViewState["MaintenanceTableName"] = Session["MaintenanceTableName"].ToString();
-                CreatePlaceHolderContents();
-            }
+            
+            
         }
         protected void CreatePlaceHolderContents()
         {
@@ -28,14 +31,14 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
 
             //PK or first column will not be rendered.
             pl.Controls.Add(new LiteralControl("<table>"));
-            for(int i = 1; i<tableColumnsSchema.Count; i++)
+            for (int i = 1; i < tableColumnsSchema.Count; i++)
             {
                 ArrayList col = (ArrayList)tableColumnsSchema[i];
                 string colName = col[0].ToString();
                 string datatype = col[1].ToString();
 
                 pl.Controls.Add(new LiteralControl("<tr><td>"));
-                Label label = new Label() { Text = colName};
+                Label label = new Label() { Text = colName };
                 pl.Controls.Add(label);
                 pl.Controls.Add(new LiteralControl("</td><td>"));
 
@@ -61,7 +64,7 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
                     tb.Attributes.Add("Type", "datetime-local");
                     pl.Controls.Add(tb);
                 }
-                else if(datatype == "bit")
+                else if (datatype == "bit")
                 {
                     CheckBox cb = new CheckBox()
                     {
@@ -78,7 +81,7 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
                     };
                     pl.Controls.Add(tb);
                 }
-               
+
                 pl.Controls.Add(new LiteralControl("</td></tr>"));
             }
             pl.Controls.Add(new LiteralControl("</table>"));
@@ -103,5 +106,110 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             }
             return values;
         }
+
+        protected void InsertRow_LinkBtn_OnClick(object sender, EventArgs e)
+        {
+            CreateNewSqlRow();
+        }
+        private bool CheckIfSqlNumType(string s)
+        {
+            s = s.ToLower();
+            if (s.Equals("bigint") || s.Equals("int") || s.Equals("tinyint") || s.Equals("smallint"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void CreateNewSqlRow()
+        {
+
+            string constr = ConfigurationManager.ConnectionStrings["MaintenanceWebUtilityDbEntitiesDataSource"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                ArrayList tableColumnsSchema = GetTableColumnsSchema();
+                string sql;
+                int id;
+
+                con.Open();
+
+                #region get MAX(ID)
+                //get MAX(id)
+                sql = $"SELECT MAX({((ArrayList)tableColumnsSchema[0])[0]}) FROM {ViewState["MaintenanceTableName"]}";
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    id = Convert.ToInt32(cmd.ExecuteScalar());
+                    id++;
+                }
+                #endregion
+
+                #region specify columns to insert to
+                //specify columns to insert to
+                sql = $"INSERT INTO {ViewState["MaintenanceTableName"]} (";
+                for (int i = 0; i < tableColumnsSchema.Count; i++)
+                {
+                    sql += (tableColumnsSchema[i] as ArrayList)[0] + ", ";
+                }
+                sql = sql.Substring(0, sql.Length - 2);
+                sql += $") VALUES({id},";
+                #endregion
+
+                //concatenate values ()
+                for (int i = 1; i < tableColumnsSchema.Count; i++)
+                {
+                    #region get controlName
+                    string controlName = "columnName_Input_";
+                    string value = "";
+                    bool isNumType;
+
+                    if (i < 10)
+                    {
+                        controlName += "0" + i.ToString();
+                    }
+                    else
+                    {
+                        controlName += i.ToString();
+                    }
+                    Control control = EditRow_PlaceHolder.FindControl(controlName);
+                    #endregion
+
+                    Debug.WriteLine(control.GetType().Name);
+                    if (control.GetType().Name == "TextBox")
+                    {
+                        value = ((TextBox)control).Text;
+                        //ifdatatype = datetime
+                        if(((ArrayList)tableColumnsSchema[i])[1].ToString() == "datetime")
+                        {
+                            value = value.Replace('T', ' ');
+                        }
+                    }
+                    else if (control.GetType().Name == "CheckBox")
+                    {
+                        value = ((CheckBox)control).Checked ? "True" : "False";
+                    }
+
+                    isNumType = CheckIfSqlNumType( ((ArrayList)tableColumnsSchema[i])[1].ToString());
+                    if (isNumType)
+                    {
+                        sql += value + ", ";
+                    }
+                    else
+                    {
+                        sql += "'" + value + "', ";
+                    }
+                }
+                sql = sql.Substring(0, sql.Length - 2);
+                sql += ")";
+
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }  
+        }
     }
 }
+
