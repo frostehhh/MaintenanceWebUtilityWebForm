@@ -352,11 +352,6 @@ namespace MaintenanceWebUtilityWebForm2
             else if(!string.IsNullOrWhiteSpace(MaintenanceName.Text) && MaintenanceName.CssClass.Contains("invalid"))
             {
                 MaintenanceName.CssClass = MaintenanceName.CssClass.Remove(MaintenanceName.CssClass.Length - " is-invalid".Length);
-                //isInputComplete = true;
-            }
-            else
-            {
-                //isInputComplete = true;
             }
             #endregion
 
