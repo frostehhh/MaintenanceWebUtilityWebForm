@@ -40,7 +40,7 @@ namespace MaintenanceWebUtilityWebForm2
             DropDownList ddl = (DropDownList)sender;
             string ID = ddl.ID.Substring(ddl.ID.Length - 2);
             TextBox tb = (TextBox)TableDataPlaceHolder.FindControl("DataTypeNum_Row_" + ID);
-            CheckDataType(ddl,tb);
+            InitializeDataTypeNumTb(ddl,tb);
         }
         public void AddRowBtn_OnClick(object sender, EventArgs e)
         {
@@ -48,8 +48,11 @@ namespace MaintenanceWebUtilityWebForm2
         }
         public void CreateBtn_OnClick(object sender, EventArgs e)
         {
-            CreateSqlMaintenance();
-            Response.Redirect("~/DynamicMaintenance/Dynamic");
+            bool isCreateSuccessful = CreateSqlMaintenance();
+            if(isCreateSuccessful)
+            {
+                Response.Redirect("~/DynamicMaintenance/Dynamic");
+            }
         }
 
         private List<string> GetSqlDataTypes()
@@ -99,7 +102,7 @@ namespace MaintenanceWebUtilityWebForm2
 
             return ddl;
         }
-        private void CheckDataType(DropDownList ddl, TextBox tb)
+        private void InitializeDataTypeNumTb(DropDownList ddl, TextBox tb)
         {
             /* Checks if DataType dropdownlist datatype includes extra parameters enclosed in ()
              * If true, enable DataTypeNum textbox,
@@ -216,7 +219,7 @@ namespace MaintenanceWebUtilityWebForm2
 
                         tb = new TextBox() { ID = "DataTypeNum_Row_" + controlIdStr };
                         tb.CssClass = "form-control col-sm-2";
-                        CheckDataType(ddl, tb);
+                        InitializeDataTypeNumTb(ddl, tb);
                         TableDataPlaceHolder.Controls.Add(tb);
                         controlIDArrayList.Add(tb.ID.ToString());
 
@@ -265,7 +268,6 @@ namespace MaintenanceWebUtilityWebForm2
         }
         private void InsertTableRow()
         {
-
             string literal;
             TextBox tb;
             DropDownList ddl;
@@ -332,7 +334,7 @@ namespace MaintenanceWebUtilityWebForm2
 
             ViewState["controlIDArrayList"] = controlIDArrayList;
         }
-        private void CreateSqlMaintenance()
+        private bool CreateSqlMaintenance()
         {
             ArrayList existingControlIDArrayList = new ArrayList();
             bool controlsArrayExists = false;
@@ -345,14 +347,16 @@ namespace MaintenanceWebUtilityWebForm2
             if (string.IsNullOrWhiteSpace(MaintenanceName.Text) && !MaintenanceName.CssClass.Contains("invalid"))
             {
                 MaintenanceName.CssClass = MaintenanceName.CssClass + " is-invalid";
+                isInputComplete = false;
             }
-            else if(string.IsNullOrWhiteSpace(MaintenanceName.Text) && MaintenanceName.CssClass.Contains("invalid"))
+            else if(!string.IsNullOrWhiteSpace(MaintenanceName.Text) && MaintenanceName.CssClass.Contains("invalid"))
             {
-                
+                MaintenanceName.CssClass = MaintenanceName.CssClass.Remove(MaintenanceName.CssClass.Length - " is-invalid".Length);
+                //isInputComplete = true;
             }
             else
             {
-                MaintenanceName.CssClass = MaintenanceName.CssClass.Remove(MaintenanceName.CssClass.Length - " is-invalid".Length);
+                //isInputComplete = true;
             }
             #endregion
 
@@ -527,11 +531,12 @@ namespace MaintenanceWebUtilityWebForm2
                             cmd.Parameters.AddWithValue("@TableName", MaintenanceName.Text);
                             cmd.ExecuteNonQuery();
                         }
-
                     }
-                    
+                    return true;
                 }
+                else return false; 
             }
+            return false;
             
         }
  
