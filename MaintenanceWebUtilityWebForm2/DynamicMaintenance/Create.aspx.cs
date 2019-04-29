@@ -110,6 +110,8 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
         protected void InsertRow_LinkBtn_OnClick(object sender, EventArgs e)
         {
             CreateNewSqlRow();
+            Session["MaintenanceTableName"] = ViewState["MaintenanceTableName"];
+            Response.Redirect("ViewTable");
         }
         private bool CheckIfSqlNumType(string s)
         {
@@ -179,7 +181,7 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
                     if (control.GetType().Name == "TextBox")
                     {
                         value = ((TextBox)control).Text;
-                        //ifdatatype = datetime
+                        //if input datatype = 'datetime', replace 'T' with ' '
                         if(((ArrayList)tableColumnsSchema[i])[1].ToString() == "datetime")
                         {
                             value = value.Replace('T', ' ');
