@@ -51,9 +51,6 @@ namespace MaintenanceWebUtilityWebForm2
             CreateSqlMaintenance();
             Response.Redirect("~/DynamicMaintenance/Dynamic");
         }
-        public void TestCreatePages_OnClick(object sender, EventArgs e)
-        {
-        }
 
         private List<string> GetSqlDataTypes()
         {

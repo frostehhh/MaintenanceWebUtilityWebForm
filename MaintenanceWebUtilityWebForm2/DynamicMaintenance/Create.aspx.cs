@@ -142,8 +142,16 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
                 sql = $"SELECT MAX({((ArrayList)tableColumnsSchema[0])[0]}) FROM {ViewState["MaintenanceTableName"]}";
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
-                    id = Convert.ToInt32(cmd.ExecuteScalar());
-                    id++;
+                    try
+                    {
+                        id = Convert.ToInt32(cmd.ExecuteScalar());
+                        id++;
+                    }
+                    catch(Exception e)
+                    {//run if no records yet
+                        id = 1;
+                    }
+                    
                 }
                 #endregion
 

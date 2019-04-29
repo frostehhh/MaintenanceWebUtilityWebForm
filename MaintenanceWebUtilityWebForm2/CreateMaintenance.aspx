@@ -52,8 +52,7 @@
                         </tbody>
                     </table>    
                     <asp:Button runat="server" class="btn btn-light" ID="AddRowBtn" Text="Add Row" OnClick="AddRowBtn_OnClick"/>
-                    <asp:Button runat="server" class="btn btn-light" ID="CreateMaintenanceBtn" Text="Create" OnClick="CreateBtn_OnClick"/> 
-                    <asp:Button runat="server" class="btn btn-light" ID="Button1" Text="Testing" OnClick="TestCreatePages_OnClick"/>    
+                    <asp:Button runat="server" class="btn btn-light" ID="CreateMaintenanceBtn" Text="Create" OnClick="CreateBtn_OnClick"/>
 
                 </div>
             </div>
