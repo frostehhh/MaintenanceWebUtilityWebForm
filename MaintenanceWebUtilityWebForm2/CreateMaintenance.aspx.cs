@@ -73,7 +73,6 @@ namespace MaintenanceWebUtilityWebForm2
                 "ntext",
                 "numeric",
                 "nvarchar",
-                "nvarchar",
                 "real",
                 "rowversion",
                 "smalldatetime",
@@ -85,7 +84,6 @@ namespace MaintenanceWebUtilityWebForm2
                 "timestamp",
                 "tinyint",
                 "uniqueidentifier",
-                "varbinary",
                 "varbinary",
                 "varchar",
                 "xml"
