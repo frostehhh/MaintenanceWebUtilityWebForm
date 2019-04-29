@@ -49,7 +49,7 @@ namespace MaintenanceWebUtilityWebForm2
         public void CreateBtn_OnClick(object sender, EventArgs e)
         {
             CreateSqlMaintenance();
-            Response.Redirect("~/DynamicMaintenance/ViewTable");
+            Response.Redirect("~/DynamicMaintenance/Dynamic");
         }
         public void TestCreatePages_OnClick(object sender, EventArgs e)
         {
