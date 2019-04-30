@@ -267,6 +267,7 @@ namespace MaintenanceWebUtilityWebForm2
             TextBox tb;
             DropDownList ddl;
             CheckBox cb;
+            LinkButton lb;
             ArrayList existingControlIDArrayList = new ArrayList();
             string controlIdStr;
 
@@ -323,6 +324,15 @@ namespace MaintenanceWebUtilityWebForm2
             tb.CssClass = "form-control";
             TableDataPlaceHolder.Controls.Add(tb);
             controlIDArrayList.Add(tb.ID.ToString());
+
+            literal = "</td><td>";
+            TableDataPlaceHolder.Controls.Add(new LiteralControl(literal));
+
+            //place here
+            lb = new LinkButton() { ID = "Remove_Row_" + controlIdStr };
+            literal = @"<i class=""fas fa-times""></i>";
+            lb.Controls.Add(new LiteralControl(literal));
+            TableDataPlaceHolder.Controls.Add(lb);
 
             literal = "</td></tr>";
             TableDataPlaceHolder.Controls.Add(new LiteralControl(literal));
