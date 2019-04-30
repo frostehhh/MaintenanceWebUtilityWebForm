@@ -31,6 +31,7 @@
                                 <th>Data Type</th>
                                 <th>Allow Nulls</th>
                                 <th>Default</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,6 +48,7 @@
                                 </td>
                                 <td><asp:CheckBox ID="AllowNulls_Row_PK" Enabled="false" runat="server" /></td>
                                 <td><asp:TextBox ID="Default_Row_PK" runat="server" CssClass="form-control" /></td>
+                                <td></td>
                             </tr>
                             <asp:PlaceHolder ID="TableDataPlaceHolder" runat="server" ClientIDMode="Static" />
                         </tbody>
