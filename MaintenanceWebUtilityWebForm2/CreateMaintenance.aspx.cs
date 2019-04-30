@@ -20,6 +20,7 @@ namespace MaintenanceWebUtilityWebForm2
 
         protected void Page_Init(object sender, EventArgs e)
         {
+            //InitializeDataTypeDropDown(DataType_Row_PK);
             List<string> sqlDataTypes = GetSqlDataTypes();
             foreach(string str in sqlDataTypes)
             {
@@ -334,6 +335,9 @@ namespace MaintenanceWebUtilityWebForm2
 
             ViewState["controlIDArrayList"] = controlIDArrayList;
         }
+        private void InitializeDataTypeDropDown(DropDownList ddl)
+        { 
+}
         private bool CreateSqlMaintenance()
         {
             ArrayList existingControlIDArrayList = new ArrayList();

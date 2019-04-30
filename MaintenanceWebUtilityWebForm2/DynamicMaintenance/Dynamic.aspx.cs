@@ -41,8 +41,6 @@ namespace MaintenanceWebUtilityWebForm2
                     }
                 }
 
-
-
                 string literal, stringIdx;
                 int i = 0;
                 foreach (string table in maintenanceTables)
