@@ -49,6 +49,52 @@ namespace MaintenanceWebUtilityWebForm2
                 Response.Redirect("~/DynamicMaintenance/Dynamic");
             }
         }
+        public void Remove_Row_OnClick(object sender, EventArgs e)
+        {
+            /* get sender(lb) ID
+             * ViewState["controlIDArrayList"] as arraylist
+             * remove ID
+             * 
+             * 
+             */
+            LinkButton lb = (LinkButton)sender;
+            string controlIdStrToRemove = lb.ID.ToString().Substring(lb.ID.ToString().Length-2);
+
+            PlaceHolder copyOfTableDataPlaceHolder = TableDataPlaceHolder;
+            //remove from placeholder
+            foreach (Control control in copyOfTableDataPlaceHolder.Controls)
+            {
+                string controlId = control.ID;
+                //get first instance of Name_Row_ ID
+                if (!string.IsNullOrEmpty(controlId) && controlId.Substring(controlId.Length - 2) == controlIdStrToRemove)
+                {
+                    int currIndex = TableDataPlaceHolder.Controls.IndexOf(control);
+                    currIndex--;
+                    for(int i = 0; i<12;i++)
+                    {
+                        TableDataPlaceHolder.Controls.RemoveAt(currIndex);
+                    }
+                    break;
+                }
+            }
+
+            ArrayList copyOfControlIDArrayList = controlIDArrayList;
+            //remove from controlidarraylist
+            foreach (string str in copyOfControlIDArrayList)
+            {
+                //get first instance of Name_Row_ ID
+                if (str.Substring(str.Length - 2) == controlIdStrToRemove)
+                {
+                    int currIndex = controlIDArrayList.IndexOf(str);
+                    for (int i = 0; i < 6; i++)
+                    {
+                        controlIDArrayList.RemoveAt(currIndex);
+                    }
+                    ViewState["controlIDArrayList"] = controlIDArrayList;
+                    break;
+                }
+            }
+        }
 
         private List<string> GetSqlDataTypes()
         {
@@ -273,6 +319,7 @@ namespace MaintenanceWebUtilityWebForm2
                         lb = new LinkButton() { ID = "Remove_Row_" + controlIdStr };
                         literal = @"<i class=""fas fa-times""></i>";
                         lb.Controls.Add(new LiteralControl(literal));
+                        lb.Click += Remove_Row_OnClick;
                         TableDataPlaceHolder.Controls.Add(lb);
                         controlIDArrayList.Add(lb.ID.ToString());
 
