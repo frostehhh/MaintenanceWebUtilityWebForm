@@ -20,20 +20,11 @@ namespace MaintenanceWebUtilityWebForm2
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            //InitializeDataTypeDropDown(DataType_Row_PK);
-            List<string> sqlDataTypes = GetSqlDataTypes();
-            foreach(string str in sqlDataTypes)
-            {
-                DataType_Row_PK.Items.Add(new ListItem(str, str));
-            }
-            DataType_Row_PK.SelectedValue = "int";
+            InitializeDataTypeDropDown(DataType_Row_PK);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack)
-            {
-                RecreateTableRows();
-            }
+            RecreateTableRows();
         }
 
         public void DataType_Row_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -210,7 +201,7 @@ namespace MaintenanceWebUtilityWebForm2
                         }
 
                         ddl = new DropDownList();
-                        ddl = AddSqlDataTypesToDropDownList(ddl);
+                        InitializeDataTypeDropDown(ddl);
                         ddl.ID = "DataType_Row_" + controlIdStr;
                         ddl.CssClass = "form-control col-sm-9";
                         ddl.AutoPostBack = true;
@@ -336,8 +327,14 @@ namespace MaintenanceWebUtilityWebForm2
             ViewState["controlIDArrayList"] = controlIDArrayList;
         }
         private void InitializeDataTypeDropDown(DropDownList ddl)
-        { 
-}
+        {
+            List<string> sqlDataTypes = GetSqlDataTypes();
+            foreach (string str in sqlDataTypes)
+            {
+                ddl.Items.Add(new ListItem(str, str));
+            }
+            ddl.SelectedValue = "int";
+        }
         private bool CreateSqlMaintenance()
         {
             ArrayList existingControlIDArrayList = new ArrayList();
