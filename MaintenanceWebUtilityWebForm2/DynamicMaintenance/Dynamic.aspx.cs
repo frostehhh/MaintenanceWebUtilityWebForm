@@ -47,10 +47,32 @@ namespace MaintenanceWebUtilityWebForm2
                 int i = 0;
                 foreach (string table in maintenanceTables)
                 {
-                    literal = @"<div class=""col-xl-4 col-sm-6 mb-4"">
-                                                        <div class=""card text-dark bg-light o-hidden h-100"">
-                                                            <div class=""card-body"">
-                                                                <div class=""mr-5"">";
+                    #region original
+                    //literal = @"<div class=""col-xl-4 col-sm-6 mb-4"">
+                    //                                    <div class=""card text-dark bg-light o-hidden h-100"">
+                    //                                        <div class=""card-body"">
+                    //                                            <div class=""mr-5"">";
+                    //MaintenanceNavPlaceHolder.Controls.Add(new LiteralControl(literal));
+
+                    //LinkButton tableLinkBtn = new LinkButton();
+                    //stringIdx = i.ToString();
+                    //if (i < 10)
+                    //{
+                    //    stringIdx = "0" + stringIdx;
+                    //}
+                    //tableLinkBtn.ID = "tableLinkBtn_" + stringIdx;
+                    //tableLinkBtn.Text = table;
+                    //tableLinkBtn.CssClass = "text-dark";
+                    //tableLinkBtn.CommandName = table;
+                    //tableLinkBtn.Click += new EventHandler(tableLinkBtn_OnClick);
+                    //MaintenanceNavPlaceHolder.Controls.Add(tableLinkBtn);
+
+                    //literal = "</div></div></div></div>";
+                    //MaintenanceNavPlaceHolder.Controls.Add(new LiteralControl(literal));
+                    #endregion
+
+                    #region new
+                    literal = @"<div class=""col-xl-4 col-sm-6 mb-4"">";
                     MaintenanceNavPlaceHolder.Controls.Add(new LiteralControl(literal));
 
                     LinkButton tableLinkBtn = new LinkButton();
@@ -60,14 +82,22 @@ namespace MaintenanceWebUtilityWebForm2
                         stringIdx = "0" + stringIdx;
                     }
                     tableLinkBtn.ID = "tableLinkBtn_" + stringIdx;
-                    tableLinkBtn.Text = table;
                     tableLinkBtn.CssClass = "text-dark";
                     tableLinkBtn.CommandName = table;
+
+                    literal = @"<div class=""card text-dark bg-light o-hidden h-100"">
+                                                            <div class=""card-body"">
+                                                                <div class=""mr-5"">";
+                    literal += table;
+                    literal +=  @"</div></div></div>";
+                    tableLinkBtn.Controls.Add(new LiteralControl(literal));
                     tableLinkBtn.Click += new EventHandler(tableLinkBtn_OnClick);
                     MaintenanceNavPlaceHolder.Controls.Add(tableLinkBtn);
-
-                    literal = "</div></div></div></div>";
+                    
+                    literal = @"</div>";
                     MaintenanceNavPlaceHolder.Controls.Add(new LiteralControl(literal));
+                    #endregion
+
                     i++;
                 }
             }
