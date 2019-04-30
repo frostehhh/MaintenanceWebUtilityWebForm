@@ -4,7 +4,7 @@
         <li class="breadcrumb-item">
             <a href="#">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Dynamic Maintenance</li>
+        <li class="breadcrumb-item ">Dynamic Maintenance</li>
         <li class="breadcrumb-item active">View Table</li>
     </ol>
     <div class="card mb-3">
