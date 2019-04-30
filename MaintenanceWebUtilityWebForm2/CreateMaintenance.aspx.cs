@@ -20,7 +20,8 @@ namespace MaintenanceWebUtilityWebForm2
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            InitializeDataTypeDropDown(DataType_Row_PK);
+            InitializeDataTypeDropDownValues(DataType_Row_PK);
+            DataType_Row_PK.SelectedValue = "int";
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,9 +30,11 @@ namespace MaintenanceWebUtilityWebForm2
 
         public void DataType_Row_OnSelectedIndexChanged(object sender, EventArgs e)
         {
+            //get DataTypeNumTb
             DropDownList ddl = (DropDownList)sender;
             string ID = ddl.ID.Substring(ddl.ID.Length - 2);
             TextBox tb = (TextBox)TableDataPlaceHolder.FindControl("DataTypeNum_Row_" + ID);
+
             InitializeDataTypeNumTb(ddl,tb);
         }
         public void AddRowBtn_OnClick(object sender, EventArgs e)
@@ -201,7 +204,7 @@ namespace MaintenanceWebUtilityWebForm2
                         }
 
                         ddl = new DropDownList();
-                        InitializeDataTypeDropDown(ddl);
+                        InitializeDataTypeDropDownValues(ddl);
                         ddl.ID = "DataType_Row_" + controlIdStr;
                         ddl.CssClass = "form-control col-sm-9";
                         ddl.AutoPostBack = true;
@@ -326,14 +329,13 @@ namespace MaintenanceWebUtilityWebForm2
 
             ViewState["controlIDArrayList"] = controlIDArrayList;
         }
-        private void InitializeDataTypeDropDown(DropDownList ddl)
+        private void InitializeDataTypeDropDownValues(DropDownList ddl)
         {
             List<string> sqlDataTypes = GetSqlDataTypes();
             foreach (string str in sqlDataTypes)
             {
                 ddl.Items.Add(new ListItem(str, str));
             }
-            ddl.SelectedValue = "int";
         }
         private bool CreateSqlMaintenance()
         {
