@@ -146,6 +146,7 @@ namespace MaintenanceWebUtilityWebForm2
             TextBox tb;
             DropDownList ddl;
             CheckBox cb;
+            LinkButton lb;
             ArrayList existingControlIDArrayList = new ArrayList();
             bool controlsArrayExists = false;
             List<string> SqlDataTypes = GetSqlDataTypes();
@@ -254,6 +255,26 @@ namespace MaintenanceWebUtilityWebForm2
                         tb.CssClass = "form-control";
                         TableDataPlaceHolder.Controls.Add(tb);
                         controlIDArrayList.Add(tb.ID.ToString());
+                        
+                        literal = "</td><td>";
+                        TableDataPlaceHolder.Controls.Add(new LiteralControl(literal));
+                    }
+                    else if(str.StartsWith("Remove_Row_"))
+                    {
+                        controlId = Convert.ToInt16(str.Substring(str.Length - 2));
+                        if (controlId <= 9)
+                        {
+                            controlIdStr = "0" + controlId;
+                        }
+                        else
+                        {
+                            controlIdStr = controlId.ToString();
+                        }
+                        lb = new LinkButton() { ID = "Remove_Row_" + controlIdStr };
+                        literal = @"<i class=""fas fa-times""></i>";
+                        lb.Controls.Add(new LiteralControl(literal));
+                        TableDataPlaceHolder.Controls.Add(lb);
+                        controlIDArrayList.Add(lb.ID.ToString());
 
                         literal = "</td></tr>";
                         TableDataPlaceHolder.Controls.Add(new LiteralControl(literal));
@@ -327,12 +348,12 @@ namespace MaintenanceWebUtilityWebForm2
 
             literal = "</td><td>";
             TableDataPlaceHolder.Controls.Add(new LiteralControl(literal));
-
-            //place here
+            
             lb = new LinkButton() { ID = "Remove_Row_" + controlIdStr };
             literal = @"<i class=""fas fa-times""></i>";
             lb.Controls.Add(new LiteralControl(literal));
             TableDataPlaceHolder.Controls.Add(lb);
+            controlIDArrayList.Add(lb.ID.ToString());
 
             literal = "</td></tr>";
             TableDataPlaceHolder.Controls.Add(new LiteralControl(literal));
