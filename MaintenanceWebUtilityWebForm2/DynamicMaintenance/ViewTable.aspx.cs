@@ -19,8 +19,9 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             {
                 tableNameLiteral.Text = Session["MaintenanceTableName"].ToString();
                 ViewState["MaintenanceTableName"] = Session["MaintenanceTableName"].ToString();
-                GetData();
             }
+            GetData();
+            ViewTable_GridView.DataKeyNames = new string[] { ViewTable_GridView.HeaderRow.Cells[1].Text};
         }
         
         protected void InsertRow_LinkBtn_OnClick(object sender, EventArgs e)
@@ -116,6 +117,22 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             //SqlCommand cmd = new SqlCommand("update detail set name='" + textName.Text + "',address='" + textadd.Text + "',country='" + textc.Text + "'where id='" + userid + "'", conn);
             //cmd.ExecuteNonQuery();
             //conn.Close();
+            GetData();
+        }
+        protected void ViewTable_GridView_OnRowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int pkId = Convert.ToInt32(ViewTable_GridView.DataKeys[e.RowIndex].Values[0]);
+            string constr = ConfigurationManager.ConnectionStrings["MaintenanceWebUtilityDbEntitiesDataSource"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            { 
+                using (SqlCommand cmd = new SqlCommand($"DELETE FROM {ViewState["MaintenanceTableName"]} WHERE {ViewTable_GridView.DataKeyNames[0]} = {pkId}"))
+                {
+                    cmd.Connection = con;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
             GetData();
         }
         private ArrayList GetHeaderRowValues(GridView gv)
