@@ -36,7 +36,7 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
             
             TableRow row = ViewTable_GridView.Rows[e.NewEditIndex];
             //set pk to read only
-            (row.Cells[1].Controls[0] as TextBox).Enabled = false;
+            //(row.Cells[1].Controls[0] as TextBox).Enabled = false;
 
             SetEditRowCssClass(row);
             SetEditRowDateInputType(row);
@@ -204,7 +204,7 @@ namespace MaintenanceWebUtilityWebForm2.DynamicMaintenance
         }
         private void SetEditRowCssClass(TableRow row)
         {
-            for (int i = 1; i < row.Cells.Count; i++)
+            for (int i = 2; i < row.Cells.Count; i++)
             {
                 var controlType = row.Cells[i].Controls[0].GetType();
                 if (controlType.Name == "TextBox")
